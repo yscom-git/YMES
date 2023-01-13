@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{14517F0D-8702-4071-8279-A0F261DCE61C}"
+	ProjectSection(SolutionItems) = preProject
+		Dlls\Oracle.ManagedDataAccess.dll = Dlls\Oracle.ManagedDataAccess.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.DB", "YMES.FX.DB\YMES.FX.DB.csproj", "{52B0490F-0910-4150-9F98-1B9BBC6D188C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.PLC", "YMES.FX.PLC\YMES.FX.PLC.csproj", "{265167C8-F09E-434B-9061-08B729F613E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.MainForm", "YMES.FX.Forms\YMES.FX.MainForm.csproj", "{B9AD1929-D4CF-4253-8DAD-1B8DF38A36FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.DEPLOY", "YMES.DEPLOY\YMES.DEPLOY.csproj", "{A6133CD0-5189-48B3-AB32-B99E44A809B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52B0490F-0910-4150-9F98-1B9BBC6D188C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B0490F-0910-4150-9F98-1B9BBC6D188C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B0490F-0910-4150-9F98-1B9BBC6D188C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B0490F-0910-4150-9F98-1B9BBC6D188C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265167C8-F09E-434B-9061-08B729F613E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265167C8-F09E-434B-9061-08B729F613E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265167C8-F09E-434B-9061-08B729F613E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265167C8-F09E-434B-9061-08B729F613E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9AD1929-D4CF-4253-8DAD-1B8DF38A36FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9AD1929-D4CF-4253-8DAD-1B8DF38A36FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9AD1929-D4CF-4253-8DAD-1B8DF38A36FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9AD1929-D4CF-4253-8DAD-1B8DF38A36FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {088ECD57-5DBC-4F36-99C4-B52372084B47}
+	EndGlobalSection
+EndGlobal
