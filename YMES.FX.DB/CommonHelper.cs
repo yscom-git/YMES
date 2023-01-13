@@ -9,6 +9,7 @@ using YMES.FX.DB.Base;
 
 namespace YMES.FX.DB
 {
+    [ToolboxItem(true)]
     public  class CommonHelper : DBComponent, IDBBase
     {
         private IDBBase m_DB;
