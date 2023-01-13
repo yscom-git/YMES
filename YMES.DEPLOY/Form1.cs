@@ -11,19 +11,11 @@ using YMES.FX.MainForm;
 
 namespace YMES.DEPLOY
 {
-    public partial class Form2 : YMES.FX.MainForm.BaseMainForm
+    public partial class Form1 : BaseMainForm
     {
-        public Form2()
+        public Form1()
         {
             InitializeComponent();
-        }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            UserControl1 ctl = new UserControl1();
-            this.AddPGM(ctl);
-            //TEST
-            //TEST2
         }
     }
 }

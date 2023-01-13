@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,9 +12,13 @@ using static YMES.FX.MainForm.Base.Common;
 
 namespace YMES.FX.MainForm.Base
 {
+    [ToolboxItem(true)]
     [TypeConverter(typeof(MainFormTitlesConverter))]
     public class MainFormDesign : MainFormComponent
     {
+        private Image m_LogoImg = Properties.Resources.PB_LOGO;
+        
+
         private MsgType m_MsgTypeText = new MsgType("WARNING", "NOTICE", "ERROR", "TRACE");
         private Common.DateFormatEnum m_TIT_DateFormat = Common.DateFormatEnum.YYYYMMDD;
         private DateTime m_CurrentTime = DateTime.Now;
@@ -88,6 +93,7 @@ namespace YMES.FX.MainForm.Base
                         ((IMainFormDesign)ContainerControl).Result_CTL.Font = m_TIT_Result_FONT;
                         ((IMainFormDesign)ContainerControl).Config_CTL.Text = m_TIT_Config;
                         ((IMainFormDesign)ContainerControl).Config_CTL.Font = m_TIT_Config_FONT;
+                        ((IMainFormDesign)ContainerControl).LogoImg.Image = m_LogoImg;
                     }
                 }
             }
@@ -114,10 +120,23 @@ namespace YMES.FX.MainForm.Base
 
             m_TIT_WorkStandard = "WORK\r\nSTANDARD";
             m_TIT_WorkStandard_FONT = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            m_LogoImg = Properties.Resources.PB_LOGO;
 
         }
 
-
+        [System.ComponentModel.Category("_YMES.Appearance")]
+        public Image LogoImg
+        {
+            get { return m_LogoImg; }
+            set 
+            { 
+                m_LogoImg = value;
+                if (Parent != null)
+                {
+                    Parent.LogoImg.Image = m_LogoImg;
+                }
+            }
+        }
         [System.ComponentModel.Category("_YMES.Appearance")]
         public string TIT_Plant
         {
@@ -377,8 +396,13 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
+
+        private void InitializeComponent()
+        {
+
+        }
     }
-    
+
     public class MainFormTitlesConverter : ExpandableObjectConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)

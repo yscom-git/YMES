@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YMES.DEPLOY.Properties {
+namespace YMES.FX.MainForm.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace YMES.DEPLOY.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YMES.DEPLOY.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("YMES.FX.MainForm.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,16 @@ namespace YMES.DEPLOY.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PB_LOGO {
+            get {
+                object obj = ResourceManager.GetObject("PB_LOGO", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace YMES.FX.MainForm.Base
         Button WorkStandard_CTL { get; set; }
         Button Exit_CTL { get; set; }
         Button Config_CTL { get; set; }
+
+        PictureBox LogoImg { get; set; }
         
     }
 }

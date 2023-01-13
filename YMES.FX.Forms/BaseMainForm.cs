@@ -81,6 +81,20 @@ namespace YMES.FX.MainForm
             get { return Btn_Config; }
             set { Btn_Config = value; }
         }
+        [Browsable(false)]
+        public PictureBox LogoImg
+        {
+            get 
+            { 
+                return pb_Logo; 
+            }
+            set 
+            { 
+
+                pb_Logo = value;
+                pb_Logo.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
         private Point m_MouseMovePoint = new Point();
         private bool m_bMoveMouse = false;
         protected override void OnLoad(EventArgs e)

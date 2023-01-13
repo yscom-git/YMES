@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 
 namespace YMES.FX.MainForm.Base
 {
+    [ToolboxItem(false)]
     public partial class MainFormComponent : Component
     {
         [Browsable(false)]
@@ -42,6 +44,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
+       
         
         public MainFormComponent()
         {

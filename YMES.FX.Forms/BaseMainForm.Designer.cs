@@ -29,8 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseMainForm));
-            YMES.FX.MainForm.Base.MsgType msgType1 = new YMES.FX.MainForm.Base.MsgType();
+            YMES.FX.MainForm.Base.MsgType msgType2 = new YMES.FX.MainForm.Base.MsgType();
             this.pn_Msg = new System.Windows.Forms.Panel();
             this.StatusProgress = new System.Windows.Forms.ProgressBar();
             this.Btn_Config = new System.Windows.Forms.Button();
@@ -278,6 +277,7 @@
             this.Pan_Logo.BackColor = System.Drawing.Color.White;
             this.Pan_Logo.Controls.Add(this.pb_Logo);
             this.Pan_Logo.Location = new System.Drawing.Point(2, 2);
+            this.Pan_Logo.Margin = new System.Windows.Forms.Padding(0);
             this.Pan_Logo.Name = "Pan_Logo";
             this.Pan_Logo.Size = new System.Drawing.Size(84, 61);
             this.Pan_Logo.TabIndex = 17;
@@ -285,8 +285,8 @@
             // pb_Logo
             // 
             this.pb_Logo.BackColor = System.Drawing.Color.White;
-            this.pb_Logo.Image = ((System.Drawing.Image)(resources.GetObject("pb_Logo.Image")));
             this.pb_Logo.Location = new System.Drawing.Point(3, 3);
+            this.pb_Logo.Margin = new System.Windows.Forms.Padding(0);
             this.pb_Logo.Name = "pb_Logo";
             this.pb_Logo.Size = new System.Drawing.Size(79, 55);
             this.pb_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -392,11 +392,14 @@
             // MainFrmDesign
             // 
             this.MainFrmDesign.ContainerControl = this;
-            msgType1.MSG_ALARM = "NOTICE";
-            msgType1.MSG_ERROR = "ERROR";
-            msgType1.MSG_TRACE = "TRACE";
-            msgType1.MSG_WARN = "WARNING";
-            this.MainFrmDesign.MsgTypeText = msgType1;
+            this.MainFrmDesign.Exit_Dlg_Contents = "Do you want to exit program?";
+            this.MainFrmDesign.Exit_Dlg_Title = "Exit of Program";
+            this.MainFrmDesign.LogoImg = global::YMES.FX.MainForm.Properties.Resources.PB_LOGO;
+            msgType2.MSG_ALARM = "NOTICE";
+            msgType2.MSG_ERROR = "ERROR";
+            msgType2.MSG_TRACE = "TRACE";
+            msgType2.MSG_WARN = "WARNING";
+            this.MainFrmDesign.MsgTypeText = msgType2;
             this.MainFrmDesign.Parent = null;
             this.MainFrmDesign.TIT_Config = "Config";
             this.MainFrmDesign.TIT_Config_FONT = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
