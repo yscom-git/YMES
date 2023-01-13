@@ -298,8 +298,9 @@ namespace YMES.FX.DB
                 Oracle.ManagedDataAccess.Client.OracleCommand cmd = new OracleCommand();
                 cmd.CommandText = query;
                 cmd.Connection = m_Conn;
-                if ((query.Contains("PKG_") || query.Contains("SP_") || query.Contains("APG_") || query.Contains("ASP_") || query.Contains("ZPG_")))
+                if (param !=null)
                 {
+                    param = GetReservedParam(param);
                     cmd.CommandType = CommandType.StoredProcedure;
                     if (param != null)
                     {
@@ -379,9 +380,9 @@ namespace YMES.FX.DB
                 cmd.CommandText = query;
                 cmd.BindByName = true;
                 int idx = 0;
-                if ((query.Contains("PKG_") || query.Contains("SP_") || query.Contains("APG_") || query.Contains("ASP_") || query.Contains("ZPG_")))
+                if (param != null)
                 {
-
+                    param = GetReservedParam(param);
                     cmd.CommandType = CommandType.StoredProcedure;
                     foreach (KeyValuePair<string, ArrayList> pair in param)
                     {
@@ -478,8 +479,9 @@ namespace YMES.FX.DB
                 cmd.CommandText = query;
                 cmd.Connection = m_Conn;
                 cmd.Transaction = tran;
-                if ((query.Contains("PKG_") || query.Contains("SP_") || query.Contains("APG_") || query.Contains("ASP_") || query.Contains("ZPG_")))
+                if (param != null)
                 {
+                    param = GetReservedParam(param);
                     cmd.CommandType = CommandType.StoredProcedure;
                     foreach (KeyValuePair<string, object> pair in param)
                     {

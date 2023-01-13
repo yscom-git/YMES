@@ -168,8 +168,9 @@ namespace YMES.FX.DB
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = query;
                 cmd.Connection = m_Conn;
-                if (query.Contains("SP_"))
+                if (param!=null)
                 {
+                    param = GetReservedParam(param);
                     cmd.CommandType = CommandType.StoredProcedure;
                     foreach (KeyValuePair<string, string> pair in param)
                     {
@@ -222,8 +223,9 @@ namespace YMES.FX.DB
                 cmd.CommandText = query;
                 cmd.Connection = m_Conn;
                 cmd.Transaction = tran;
-                if (query.Contains("SP_") && param != null)
+                if (param != null)
                 {
+                    param = GetReservedParam(param);
                     cmd.CommandType = CommandType.StoredProcedure;
                     foreach (KeyValuePair<string, string> pair in param)
                     {
