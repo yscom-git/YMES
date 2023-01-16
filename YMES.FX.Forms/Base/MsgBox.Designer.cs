@@ -36,6 +36,7 @@
             this.Lbl_Msg = new System.Windows.Forms.Label();
             this.Lbl_Icon = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,6 +142,15 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "▲";
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(619, 174);
+            this.panel1.TabIndex = 10;
+            // 
             // MsgBox
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -150,8 +160,10 @@
             this.Controls.Add(this.Lbl_Msg);
             this.Controls.Add(this.Lbl_Icon);
             this.Controls.Add(this.Lbl_Title);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MsgBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MsgBox";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -169,5 +181,6 @@
         private System.Windows.Forms.Label Lbl_Msg;
         private System.Windows.Forms.Label Lbl_Icon;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
