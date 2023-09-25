@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BaseContainer.Designer.cs">
+      <DependentUpon>BaseContainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BaseContainer.resx">
+      <DependentUpon>BaseContainer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseMainForm.resx">
       <DependentUpon>BaseMainForm.cs</DependentUpon>
     </EmbeddedResource>
