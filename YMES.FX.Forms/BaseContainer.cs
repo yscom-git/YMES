@@ -12,6 +12,7 @@ namespace YMES.FX.MainForm
 {
     public partial class BaseContainer : UserControl
     {
+        
         public BaseContainer()
         {
             InitializeComponent();

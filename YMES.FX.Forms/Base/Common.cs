@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -49,8 +51,36 @@ namespace YMES.FX.MainForm.Base
             }
             return null;
         }
-        
-        
+
+        public static DataTable GetXml2DT(string path)
+        {
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    DataSet ds = new DataSet();
+                    ds.ReadXml(path);
+                    if (ds.Tables.Count > 0)
+                    {
+                        for (int row = 0; row < ds.Tables[0].Rows.Count; row++)
+                        {
+                            for (int col = 0; col < ds.Tables[0].Columns.Count; col++)
+                            {
+                                ds.Tables[0].Rows[row][col] = ds.Tables[0].Rows[row][col].ToString().Trim();
+                            }
+                        }
+                    }
+                    return ds.Tables[0];
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
 
         [StructLayout(LayoutKind.Sequential)]
         public struct SYSTEMTIME

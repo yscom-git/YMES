@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             YMES.FX.MainForm.Base.MsgType msgType1 = new YMES.FX.MainForm.Base.MsgType();
             this.pn_Msg = new System.Windows.Forms.Panel();
             this.StatusProgress = new System.Windows.Forms.ProgressBar();
@@ -53,8 +52,9 @@
             this.lbl_Bizcd = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Pan_Body = new System.Windows.Forms.Panel();
-            this.TmrTimeBase = new System.Windows.Forms.Timer(this.components);
+            this.TmrTimeBase = new System.Windows.Forms.Timer();
             this.MainFrmDesign = new YMES.FX.MainForm.Base.MainFormDesign();
+            this.DBHelper = new YMES.FX.DB.CommonHelper();
             this.pn_Msg.SuspendLayout();
             this.pn_Main.SuspendLayout();
             this.Pan_Title.SuspendLayout();
@@ -391,7 +391,10 @@
             // 
             // MainFrmDesign
             // 
+            this.MainFrmDesign.AppIcon = null;
             this.MainFrmDesign.ContainerControl = this;
+            this.MainFrmDesign.DuplicatedRunMsg = "Duplicated Application";
+            this.MainFrmDesign.DuplicatedRunTitle = "Violated Run";
             this.MainFrmDesign.Exit_Dlg_Contents = "Do you want to exit program?";
             this.MainFrmDesign.Exit_Dlg_Title = "Exit of Program";
             this.MainFrmDesign.LogoImg = global::YMES.FX.MainForm.Properties.Resources.PB_LOGO;
@@ -416,6 +419,14 @@
             this.MainFrmDesign.TIT_Station_FONT = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
             this.MainFrmDesign.TIT_WorkStandard = "WORK\r\nSTANDARD";
             this.MainFrmDesign.TIT_WorkStandard_FONT = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            // 
+            // DBHelper
+            // 
+            this.DBHelper.DBKind = YMES.FX.DB.Base.DBKindEnum.Oracle;
+            this.DBHelper.DBOpenTY = YMES.FX.DB.Base.DBOpenEnum.XML;
+            this.DBHelper.IsDBTrace = false;
+            this.DBHelper.OutRefCurString = "OUT_CURSOR";
+            this.DBHelper.XMLConfigPath = "";
             // 
             // BaseMainForm
             // 
@@ -462,5 +473,6 @@
         private System.Windows.Forms.Panel Pan_Body;
         private System.Windows.Forms.Timer TmrTimeBase;
         public Base.MainFormDesign MainFrmDesign;
+        private DB.CommonHelper DBHelper;
     }
 }

@@ -158,6 +158,7 @@ namespace YMES.FX.MainForm
                 if (this.Pan_Body.Controls.Contains(bc) == false)
                 {
                     this.Pan_Body.Controls.Add(bc);
+                    
                 }
             }
             
