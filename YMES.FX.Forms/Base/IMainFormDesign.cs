@@ -22,6 +22,6 @@ namespace YMES.FX.MainForm.Base
         Button Config_CTL { get; set; }
 
         PictureBox LogoImg { get; set; }
-        
+        Icon AppIcon { get; set; }
     }
 }

@@ -110,6 +110,19 @@ namespace YMES.FX.MainForm
                 pb_Logo.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
+        [Browsable(false)]
+        public Icon AppIcon
+        {
+            get
+            {
+                return this.Icon;
+            }
+            set
+            {
+
+                this.Icon = value;
+            }
+        }
         private Point m_MouseMovePoint = new Point();
         private bool m_bMoveMouse = false;
         protected override void OnLoad(EventArgs e)
@@ -131,7 +144,7 @@ namespace YMES.FX.MainForm
                 System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out isNew);
                 if (isNew == false)
                 {    // Duplicated Run
-                    MessageBox.Show("Duplicated Excution", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FrmMsgBox(Common.MsgTypeEnum.Error, MainFrmDesign.DuplicatedRunMsg, MainFrmDesign.DuplicatedRunTitle, MsgBox.MsgBtnEnum.OK, true, true);
                     Application.Exit();
                     return;
                 }
@@ -254,7 +267,7 @@ namespace YMES.FX.MainForm
                         
             }));
         }
-        public DialogResult FrmMsgBox(Common.MsgTypeEnum msgType, string contents, string title, MsgBox.MsgBtnEnum btnty = MsgBox.MsgBtnEnum.OK, bool beep = false)
+        public DialogResult FrmMsgBox(Common.MsgTypeEnum msgType, string contents, string title, MsgBox.MsgBtnEnum btnty = MsgBox.MsgBtnEnum.OK, bool beep = false, bool bModal = false)
         {
             DialogResult rslt = DialogResult.OK;
             try
@@ -270,11 +283,12 @@ namespace YMES.FX.MainForm
                 MsgBox msg = new MsgBox(MainFrmDesign.MsgTypeText);
                 
                 msg.Name = "BaseMainForm_MSG";
-                bool modal = false;
+                bool modal = bModal;
                 if (btnty == MsgBox.MsgBtnEnum.YesNo)
                 {
                     modal = true;
                 }
+
                 rslt = msg.ShowDlg(msgType, contents, title, btnty, modal);
 
                 if (msgType != Common.MsgTypeEnum.Trace)
