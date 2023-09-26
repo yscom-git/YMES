@@ -11,9 +11,9 @@ using YMES.FX.MainForm;
 
 namespace YMES.DEPLOY
 {
-    public partial class Form1 : BaseMainForm
+    public partial class CustomizedMainFrm : BaseMainForm
     {
-        public Form1()
+        public CustomizedMainFrm()
         {
             InitializeComponent();
         }

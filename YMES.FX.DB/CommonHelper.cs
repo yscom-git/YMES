@@ -112,9 +112,9 @@ namespace YMES.FX.DB
             return m_DB.AsynBusy(key);
         }
 
-        public void AsyncExcute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
+        public void AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
-            m_DB.AsyncExcute(sender, qt, query, param);
+            m_DB.AsyncExecute(sender, qt, query, param);
         }
 
         public int BulkInsert(string toTable, ref DataTable sendData, bool bAppend = true)
@@ -127,19 +127,19 @@ namespace YMES.FX.DB
             return m_DB.Close();
         }
 
-        public int ExcuteNonQuery(string query, Dictionary<string, string> param = null)
+        public int ExecuteNonQuery(string query, Dictionary<string, string> param = null)
         {
-            return m_DB.ExcuteNonQuery(query, param);
+            return m_DB.ExecuteNonQuery(query, param);
         }
 
-        public int ExcuteNonQuery(string query, Dictionary<string, object> param)
+        public int ExecuteNonQuery(string query, Dictionary<string, object> param)
         {
-            return m_DB.ExcuteNonQuery(query, param);
+            return m_DB.ExecuteNonQuery(query, param);
         }
 
-        public DataTable ExcuteQuery(string query, Dictionary<string, string> param = null)
+        public DataTable ExecuteQuery(string query, Dictionary<string, string> param = null)
         {
-            return m_DB.ExcuteQuery(query, param);
+            return m_DB.ExecuteQuery(query, param);
         }
 
         public bool IsOpen()

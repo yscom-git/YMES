@@ -41,7 +41,7 @@ namespace YMES.FX.DB
                 m_DBOpenTY = value;
             }
         }
-        public int ExcuteNonQuery(string query, Dictionary<string, object> param)
+        public int ExecuteNonQuery(string query, Dictionary<string, object> param)
         {
             return -1;
         }
@@ -151,7 +151,7 @@ namespace YMES.FX.DB
             }
         }
 
-        public DataTable ExcuteQuery(string query, Dictionary<string, string> param = null)
+        public DataTable ExecuteQuery(string query, Dictionary<string, string> param = null)
         {
 
             try
@@ -205,7 +205,7 @@ namespace YMES.FX.DB
             }
         }
 
-        public int ExcuteNonQuery(string query, Dictionary<string, string> param = null)
+        public int ExecuteNonQuery(string query, Dictionary<string, string> param = null)
         {
             SqlTransaction tran = null;
             try
@@ -298,7 +298,7 @@ namespace YMES.FX.DB
         }
 
 
-        public void AsyncExcute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
+        public void AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
 
             AsyncDBST rst = new AsyncDBST();
@@ -307,9 +307,9 @@ namespace YMES.FX.DB
             rst.dt = new DataTable();
 
             BackgroundWorker backWorker = new BackgroundWorker();
-            backWorker.DoWork += new DoWorkEventHandler(ExcuteBackground_DoWork);
-            backWorker.ProgressChanged += new ProgressChangedEventHandler(ExcuteBackground_ProgressChanged);
-            backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExcuteBackground_RunWorkerCompleted);
+            backWorker.DoWork += new DoWorkEventHandler(ExecuteBackground_DoWork);
+            backWorker.ProgressChanged += new ProgressChangedEventHandler(ExecuteBackground_ProgressChanged);
+            backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExecuteBackground_RunWorkerCompleted);
             backWorker.WorkerReportsProgress = true;
             backWorker.WorkerSupportsCancellation = true;
 
@@ -327,7 +327,7 @@ namespace YMES.FX.DB
             }
 
         }
-        private void ExcuteBackground_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void ExecuteBackground_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             AsyncDBST rst = (AsyncDBST)e.Result;
             if (e.Error != null)
@@ -351,7 +351,7 @@ namespace YMES.FX.DB
             }
         }
 
-        private void ExcuteBackground_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void ExecuteBackground_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (OnBackgroundPR != null)
             {
@@ -360,7 +360,7 @@ namespace YMES.FX.DB
             }
         }
 
-        private void ExcuteBackground_DoWork(object sender, DoWorkEventArgs e)
+        private void ExecuteBackground_DoWork(object sender, DoWorkEventArgs e)
         {
             AsyncDBST rst = new AsyncDBST();
             rst = (AsyncDBST)e.Argument;
@@ -372,11 +372,11 @@ namespace YMES.FX.DB
                 {
                     if (rst.qt == DBQueryTypeEnum.Get)
                     {
-                        rst.dt = ExcuteQuery(rst.query, rst.param);
+                        rst.dt = ExecuteQuery(rst.query, rst.param);
                     }
                     else if (rst.qt == DBQueryTypeEnum.Set)
                     {
-                        ExcuteNonQuery(rst.query, rst.param);
+                        ExecuteNonQuery(rst.query, rst.param);
                     }
                 }
                 e.Result = rst;

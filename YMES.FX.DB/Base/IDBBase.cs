@@ -37,14 +37,14 @@ namespace YMES.FX.DB.Base
         /// <param name="query">Query or (PKG)SP</param>
         /// <param name="param">Parameters</param>
         /// <returns>Data(DataTable)</returns>
-        DataTable ExcuteQuery(string query, Dictionary<string, string> param=null);
+        DataTable ExecuteQuery(string query, Dictionary<string, string> param=null);
         /// <summary>
         /// DML Query
         /// </summary>
         /// <param name="query">Query or (PKG)SP</param>
         /// <param name="param">Parameters</param>
         /// <returns>Affected Count</returns>
-        int ExcuteNonQuery(string query, Dictionary<string, string> param=null);
+        int ExecuteNonQuery(string query, Dictionary<string, string> param=null);
         /// <summary>
         /// Bulk Insert Data
         /// </summary>
@@ -52,11 +52,11 @@ namespace YMES.FX.DB.Base
         /// <param name="sendData">Insert DataTable</param>
         /// <param name="bAppend">Append</param>
         /// <returns>Affected Count</returns>
-        int ExcuteNonQuery(string query, Dictionary<string, object> param);
+        int ExecuteNonQuery(string query, Dictionary<string, object> param);
         int BulkInsert(string toTable, ref DataTable sendData, bool bAppend = true);
         bool AsynBusy(object key);
 
-        void AsyncExcute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param);
+        void AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param);
        
         string XMLConfigPath { get; set; }
         string OutRefCurString { get; set; }

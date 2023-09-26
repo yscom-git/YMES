@@ -17,9 +17,24 @@ namespace YMES.FX.MainForm
 {
     public partial class BaseMainForm : Form, IMainFormDesign
     {
+        private const string CN_CATEGORY = "_YMES";
         public delegate void BeepBar(object sender, bool bBeep);
         public event BeepBar OnBeepBar = null;
-
+        private bool m_AllowDuplicatedRun = false;
+        private BaseContainer m_ChildBC = null;
+       
+        [Category(CN_CATEGORY)]
+        public bool AllowDuplicatedRun
+        {
+            get { return m_AllowDuplicatedRun; }
+            set { m_AllowDuplicatedRun = value; }
+        }
+        [Browsable(false)]
+        public BaseContainer ChildBC
+        {
+            get { return m_ChildBC; }
+            set { m_ChildBC = value; }
+        }
         [Browsable(false)]
         public Label Plant_CTL
         {
@@ -103,18 +118,40 @@ namespace YMES.FX.MainForm
             
             if (DesignMode == false)
             {
-                SetDesign();
+                CheckDuplicatedRun(AllowDuplicatedRun);
                 TmrTimeBase.Start();
-
-
+                ContainsBC(ChildBC);
             }
         }
-        private void SetDesign()
+        private void CheckDuplicatedRun(bool allowDupRun)
         {
-
+            if (allowDupRun == false)
+            {
+                bool isNew = true;
+                System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out isNew);
+                if (isNew == false)
+                {    // Duplicated Run
+                    MessageBox.Show("Duplicated Excution", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                    return;
+                }
+            }
+        }
+        private void ContainsBC(BaseContainer bc)
+        {
+            if (bc != null)
+            {
+                bc.Dock = DockStyle.Fill;
+                if (this.Pan_Body.Controls.Contains(bc) == false)
+                {
+                    this.Pan_Body.Controls.Add(bc);
+                }
+            }
+            
         }
         public BaseMainForm()
         {
+            
             InitializeComponent();
         }
 

@@ -280,7 +280,7 @@ namespace YMES.FX.DB
             }
             return true;
         }
-        public DataTable ExcuteQuery(string query, Dictionary<string, string> param = null)
+        public DataTable ExecuteQuery(string query, Dictionary<string, string> param = null)
         {
 
             try
@@ -358,7 +358,7 @@ namespace YMES.FX.DB
             }
 
         }
-        public int ExcuteNonQueryList(string query, Dictionary<string, ArrayList> param)
+        public int ExecuteNonQueryList(string query, Dictionary<string, ArrayList> param)
         {
             OracleTransaction tran = null;
             try
@@ -459,7 +459,7 @@ namespace YMES.FX.DB
                 }
             }
         }
-        public int ExcuteNonQuery(string query, Dictionary<string, object> param)
+        public int ExecuteNonQuery(string query, Dictionary<string, object> param)
         {
             OracleTransaction tran = null;
             try
@@ -549,7 +549,7 @@ namespace YMES.FX.DB
                 }
             }
         }
-        public int ExcuteNonQuery(string query, Dictionary<string, string> param = null)
+        public int ExecuteNonQuery(string query, Dictionary<string, string> param = null)
         {
             Dictionary<string, object> dicRet = null;
 
@@ -561,7 +561,7 @@ namespace YMES.FX.DB
                     dicRet.Add(pa.Key, (object)pa.Value);
                 }
             }
-            return ExcuteNonQuery(query, dicRet);
+            return ExecuteNonQuery(query, dicRet);
         }
 
 
@@ -619,7 +619,7 @@ namespace YMES.FX.DB
 
                 string query = "";
                 query = string.Format("insert into {0}({1}) values({2})", toTable, cols, vals);
-                ExcuteNonQueryList(query, param);
+                ExecuteNonQueryList(query, param);
 
             }
             catch (Exception eLog)
@@ -634,11 +634,11 @@ namespace YMES.FX.DB
 
         BackgroundWorker m_backWorker = null;
         Dictionary<object, BackgroundWorker> m_dicBackWK = new Dictionary<object, BackgroundWorker>();
-        public void AsyncExcute(DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
+        public void AsyncExecute(DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
-            AsyncExcute(null, qt, query, param);
+            AsyncExecute(null, qt, query, param);
         }
-        public void AsyncExcute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
+        public void AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
             try
             {
@@ -652,9 +652,9 @@ namespace YMES.FX.DB
                     if (m_backWorker == null)
                     {
                         m_backWorker = new BackgroundWorker();
-                        m_backWorker.DoWork += new DoWorkEventHandler(ExcuteBackground_DoWork);
-                        m_backWorker.ProgressChanged += new ProgressChangedEventHandler(ExcuteBackground_ProgressChanged);
-                        m_backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExcuteBackground_RunWorkerCompleted);
+                        m_backWorker.DoWork += new DoWorkEventHandler(ExecuteBackground_DoWork);
+                        m_backWorker.ProgressChanged += new ProgressChangedEventHandler(ExecuteBackground_ProgressChanged);
+                        m_backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExecuteBackground_RunWorkerCompleted);
                         m_backWorker.WorkerReportsProgress = true;
                         m_backWorker.WorkerSupportsCancellation = true;
                     }
@@ -675,9 +675,9 @@ namespace YMES.FX.DB
                     {
                         BackgroundWorker backWorker = new BackgroundWorker();
                         backWorker = new BackgroundWorker();
-                        backWorker.DoWork += new DoWorkEventHandler(ExcuteBackground_DoWork);
-                        backWorker.ProgressChanged += new ProgressChangedEventHandler(ExcuteBackground_ProgressChanged);
-                        backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExcuteBackground_RunWorkerCompleted);
+                        backWorker.DoWork += new DoWorkEventHandler(ExecuteBackground_DoWork);
+                        backWorker.ProgressChanged += new ProgressChangedEventHandler(ExecuteBackground_ProgressChanged);
+                        backWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(ExecuteBackground_RunWorkerCompleted);
                         backWorker.WorkerReportsProgress = true;
                         backWorker.WorkerSupportsCancellation = true;
                         m_dicBackWK.Add(sender, backWorker);
@@ -704,7 +704,7 @@ namespace YMES.FX.DB
             }
 
         }
-        private void ExcuteBackground_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void ExecuteBackground_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             try
             {
@@ -735,7 +735,7 @@ namespace YMES.FX.DB
 
         }
 
-        private void ExcuteBackground_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void ExecuteBackground_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
             {
@@ -752,7 +752,7 @@ namespace YMES.FX.DB
 
         }
 
-        private void ExcuteBackground_DoWork(object sender, DoWorkEventArgs e)
+        private void ExecuteBackground_DoWork(object sender, DoWorkEventArgs e)
         {
 
             AsyncDBST rst = new AsyncDBST();
@@ -765,11 +765,11 @@ namespace YMES.FX.DB
                 {
                     if (rst.qt == DBQueryTypeEnum.Get)
                     {
-                        rst.dt = ExcuteQuery(rst.query, rst.param);
+                        rst.dt = ExecuteQuery(rst.query, rst.param);
                     }
                     else if (rst.qt == DBQueryTypeEnum.Set)
                     {
-                        ExcuteNonQuery(rst.query, rst.param);
+                        ExecuteNonQuery(rst.query, rst.param);
                     }
                 }
                 e.Result = rst;

@@ -146,7 +146,7 @@ namespace YMES.FX.DB
             }
 
         }
-        public DataTable ExcuteQuery(string query)
+        public DataTable ExecuteQuery(string query)
         {
             DataTable dt = new DataTable();
 
@@ -171,7 +171,7 @@ namespace YMES.FX.DB
             }
 
         }
-        public bool ExcuteNonQuery(string query)
+        public bool ExecuteNonQuery(string query)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace YMES.FX.DB
 
 
         }
-        public int ExcuteNonQuery(string query, Dictionary<string, object> param)
+        public int ExecuteNonQuery(string query, Dictionary<string, object> param)
         {
             return -1;
         }
@@ -228,16 +228,16 @@ namespace YMES.FX.DB
             return m_IsOpen;
         }
 
-        DataTable IDBBase.ExcuteQuery(string query, Dictionary<string, string> param)
+        DataTable IDBBase.ExecuteQuery(string query, Dictionary<string, string> param)
         {
-            return ExcuteQuery(query);
+            return ExecuteQuery(query);
         }
 
-        int IDBBase.ExcuteNonQuery(string query, Dictionary<string, string> param)
+        int IDBBase.ExecuteNonQuery(string query, Dictionary<string, string> param)
         {
             try
             {
-                ExcuteNonQuery(query);
+                ExecuteNonQuery(query);
 
             }
             catch
@@ -252,7 +252,7 @@ namespace YMES.FX.DB
             throw new NotImplementedException();
         }
 
-        void IDBBase.AsyncExcute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
+        void IDBBase.AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
             throw new NotImplementedException();
         }
