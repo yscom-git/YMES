@@ -16,15 +16,25 @@ namespace YMES.FX.DB
 
         public CommonHelper()
         {
-            
-            switch(m_DBKind)
+            AssignDBType(m_DBKind);
+        }
+        public CommonHelper(DBKindEnum ty)
+        {
+            AssignDBType(ty);
+
+
+        }
+        private void AssignDBType(DBKindEnum ty)
+        {
+            m_DBKind = ty;
+            switch (ty)
             {
                 case DBKindEnum.Oracle:
                     m_DB = new OracleHelper();
                     break;
                 case DBKindEnum.MSSQL:
                     m_DB = new MSSqlHelper();
-                    break;                
+                    break;
                 case DBKindEnum.WCF:
                     m_DB = new WCFHelper();
                     break;

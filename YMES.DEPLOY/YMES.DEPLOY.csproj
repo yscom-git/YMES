@@ -52,6 +52,12 @@
     <Compile Include="CustomizedMainFrm.Designer.cs">
       <DependentUpon>CustomizedMainFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MES\TagPrt_PartCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MES\TagPrt_PartCheck.Designer.cs">
+      <DependentUpon>TagPrt_PartCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomizedMainFrm.resx">
@@ -93,6 +99,11 @@
       <Project>{265167c8-f09e-434b-9061-08b729f613e5}</Project>
       <Name>YMES.FX.PLC</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

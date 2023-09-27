@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             YMES.FX.MainForm.Base.MsgType msgType1 = new YMES.FX.MainForm.Base.MsgType();
             this.pn_Msg = new System.Windows.Forms.Panel();
             this.StatusProgress = new System.Windows.Forms.ProgressBar();
@@ -52,9 +53,8 @@
             this.lbl_Bizcd = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Pan_Body = new System.Windows.Forms.Panel();
-            this.TmrTimeBase = new System.Windows.Forms.Timer();
+            this.TmrTimeBase = new System.Windows.Forms.Timer(this.components);
             this.MainFrmDesign = new YMES.FX.MainForm.Base.MainFormDesign();
-            this.DBHelper = new YMES.FX.DB.CommonHelper();
             this.pn_Msg.SuspendLayout();
             this.pn_Main.SuspendLayout();
             this.Pan_Title.SuspendLayout();
@@ -420,14 +420,6 @@
             this.MainFrmDesign.TIT_WorkStandard = "WORK\r\nSTANDARD";
             this.MainFrmDesign.TIT_WorkStandard_FONT = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             // 
-            // DBHelper
-            // 
-            this.DBHelper.DBKind = YMES.FX.DB.Base.DBKindEnum.Oracle;
-            this.DBHelper.DBOpenTY = YMES.FX.DB.Base.DBOpenEnum.XML;
-            this.DBHelper.IsDBTrace = false;
-            this.DBHelper.OutRefCurString = "OUT_CURSOR";
-            this.DBHelper.XMLConfigPath = "";
-            // 
             // BaseMainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -473,6 +465,5 @@
         private System.Windows.Forms.Panel Pan_Body;
         private System.Windows.Forms.Timer TmrTimeBase;
         public Base.MainFormDesign MainFrmDesign;
-        private DB.CommonHelper DBHelper;
     }
 }
