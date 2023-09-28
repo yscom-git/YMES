@@ -12,9 +12,14 @@ namespace YMES.DEPLOY.MES
 {
     public partial class TagPrt_PartCheck : YMES.FX.MainForm.BaseContainer
     {
+        
         public TagPrt_PartCheck()
         {
             InitializeComponent();
+        }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
         }
     }
 }

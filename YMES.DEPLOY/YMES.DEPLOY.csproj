@@ -63,6 +63,9 @@
     <EmbeddedResource Include="CustomizedMainFrm.resx">
       <DependentUpon>CustomizedMainFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MES\TagPrt_PartCheck.resx">
+      <DependentUpon>TagPrt_PartCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
