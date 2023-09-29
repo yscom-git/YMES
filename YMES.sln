@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.MainForm", "YMES.FX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.DEPLOY", "YMES.DEPLOY\YMES.DEPLOY.csproj", "{A6133CD0-5189-48B3-AB32-B99E44A809B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.Devices", "YMES.FX.Devices\YMES.FX.Devices.csproj", "{C3E02D0B-9CAA-4015-B258-A99F2FE7F81A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YMES.FX.Common", "YMES.FX.Common\YMES.FX.Common.csproj", "{AC727E9A-119F-4952-A617-FA9DF2714C2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +42,14 @@ Global
 		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6133CD0-5189-48B3-AB32-B99E44A809B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E02D0B-9CAA-4015-B258-A99F2FE7F81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E02D0B-9CAA-4015-B258-A99F2FE7F81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E02D0B-9CAA-4015-B258-A99F2FE7F81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E02D0B-9CAA-4015-B258-A99F2FE7F81A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC727E9A-119F-4952-A617-FA9DF2714C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC727E9A-119F-4952-A617-FA9DF2714C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC727E9A-119F-4952-A617-FA9DF2714C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC727E9A-119F-4952-A617-FA9DF2714C2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
