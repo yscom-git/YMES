@@ -15,6 +15,7 @@ namespace YMES.FX.MainForm.Base
         Label Station_CTL { get; set; }
         Label Date_CTL { get; set; }
         Label Time_CTL { get; set; }
+        Label StatusMsg { get; set; }
         Label MsgTitle_CTL { get; set; }
         Button Result_CTL { get; set; }
         Button WorkStandard_CTL { get; set; }

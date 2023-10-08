@@ -404,22 +404,26 @@ namespace YMES.FX.MainForm.Base
                     case Common.MsgTypeEnum.Alarm:
                         Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_ALARM;
                         Parent.MsgTitle_CTL.BackColor = Color.Blue;
-                        Parent.MsgTitle_CTL.ForeColor = Color.Blue;
+                        Parent.MsgTitle_CTL.ForeColor = Color.White;
+                        Parent.StatusMsg.ForeColor = Color.Blue;
                         break;
                     case Common.MsgTypeEnum.Error:
                         Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_ERROR;
                         Parent.MsgTitle_CTL.BackColor = Color.Red;
-                        Parent.MsgTitle_CTL.ForeColor = Color.Red;
+                        Parent.MsgTitle_CTL.ForeColor = Color.White;
+                        Parent.StatusMsg.ForeColor = Color.Red;
                         break;
                     case Common.MsgTypeEnum.Warnning:
                         Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_WARN;
                         Parent.MsgTitle_CTL.BackColor = Color.Purple;
-                        Parent.MsgTitle_CTL.ForeColor = Color.Purple;
+                        Parent.MsgTitle_CTL.ForeColor = Color.White;
+                        Parent.StatusMsg.ForeColor = Color.Purple;
                         break;
                     case Common.MsgTypeEnum.Trace:
                         Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_TRACE;
                         Parent.MsgTitle_CTL.BackColor = Color.Purple;
-                        Parent.MsgTitle_CTL.ForeColor = Color.Purple;
+                        Parent.MsgTitle_CTL.ForeColor = Color.White;
+                        Parent.StatusMsg.ForeColor = Color.Purple;
                         break;
                 }
             }

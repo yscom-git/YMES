@@ -99,6 +99,12 @@ namespace YMES.FX.MainForm
             get { return lbl_MsgTitle; }
             set { lbl_MsgTitle = value; }
         }
+        [Browsable(false)]
+        public Label StatusMsg
+        {
+            get { return lbl_Msg; }
+            set { lbl_Msg = value; }
+        }
 
         [Browsable(false)]
         public Button WorkStandard_CTL
