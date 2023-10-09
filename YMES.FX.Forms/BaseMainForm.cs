@@ -262,6 +262,7 @@ namespace YMES.FX.MainForm
             if (bc != null)
             {
                 bc.Dock = DockStyle.Fill;
+                this.Pan_Body.Controls.Clear();
                 if (this.Pan_Body.Controls.Contains(bc) == false)
                 {
                     this.Pan_Body.Controls.Add(bc);

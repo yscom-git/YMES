@@ -53,7 +53,7 @@ namespace YMES.FX.DB
                     {
                         if (ds.Tables[0].Rows.Count > 0)
                         {
-                            string uri = ds.Tables[0].Columns.Contains("WCF_URL") ? ds.Tables[0].Rows[0]["WCF_URL"].ToString() : "";
+                            string uri = ds.Tables[0].Columns.Contains("DBNAME") ? ds.Tables[0].Rows[0]["DBNAME"].ToString() : "";
                             string user = ds.Tables[0].Columns.Contains("DBUID") ? ds.Tables[0].Rows[0]["DBUID"].ToString() : "";
 
                             return OpenClient(uri, user);

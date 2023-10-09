@@ -3,11 +3,11 @@
 <YMES_CONFIG>	
 	<CORCD>5200</CORCD><!--Corporation Code-->
 	<BIZCD>5210</BIZCD><!--Business Code-->
-	<DB_CONNECTION>ORACLE</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->
-	<DBNAME>172.22.151.203;172.22.151.204</DBNAME><!--DB Server IP-->
-	<DBUID>mes</DBUID><!--DB User ID-->
-	<DBPWD>mes</DBPWD><!--DB User Password-->
-	<DBSERVICE>SYAP</DBSERVICE><!--DB Service(Oracle)-->	
+	<DB_CONNECTION>WCF</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->
+	<DBNAME>http://wcf.yscom.co.kr:1818/wcf</DBNAME><!--DB Server IP-->
+	<DBUID></DBUID><!--DB User ID-->
+	<DBPWD></DBPWD><!--DB User Password-->
+	<DBSERVICE></DBSERVICE><!--DB Service(Oracle)-->	
 	
 	
 	<DEBUG_CLIENT>@MES.TagPrt_PartCheck</DEBUG_CLIENT><!--Client IP or @namespace.BC-->
