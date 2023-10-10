@@ -35,6 +35,7 @@
             // 
             this.MainFrmDesign.AppIcon = ((System.Drawing.Icon)(resources.GetObject("MainFrmDesign.AppIcon")));
             this.MainFrmDesign.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.DDMMYYYY;
+            this.MainFrmDesign.Xml_DBSvr_NM = "SVR";
             // 
             // CustomizedMainFrm
             // 

@@ -35,6 +35,16 @@ namespace YMES.FX.DB.Base
         public string PORT;
 
     }
+    public struct XMLConfEleNameST
+    {
+        public string dbKind;
+        public string dbServer;
+        public string dbID;
+        public string dbPWD;
+        public string dbSID;
+        public string dbPORT;
+    }
+        
     public enum XMLConfNameEnum
     {
         dbKind, dbServer, dbID, dbPWD, dbSID, dbPORT

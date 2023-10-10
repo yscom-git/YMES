@@ -15,7 +15,7 @@ namespace YMES.FX.DB.Base
     {
 
         protected bool m_IsAsynBusy = false;
-        private XMLConfConnEle m_XMLConfConnEle =new XMLConfConnEle();
+        private XMLConfEleNameST m_XMLConfConnEle;
         protected DBConntionInforST m_DBConnInfor;
         private bool m_IsOciConnect = false;
         private string m_OutRefCurString = "OUT_CURSOR";
@@ -30,7 +30,7 @@ namespace YMES.FX.DB.Base
         { 
             get { return m_DBConnInfor; }
         }
-        public XMLConfConnEle XMLConfConnEle 
+        public XMLConfEleNameST XMLConfConnEle 
         { 
             get { return m_XMLConfConnEle; }
             set {  m_XMLConfConnEle = value;}
@@ -121,6 +121,15 @@ namespace YMES.FX.DB.Base
             }
             return param;
 
+        }
+        public void SetXMLName(string dbKind, string dbServer, string dbID, string dbPWD, string dbSID, string dbPORT)
+        {
+            m_XMLConfConnEle.dbKind = dbKind;
+            m_XMLConfConnEle.dbServer = dbServer;
+            m_XMLConfConnEle.dbSID = dbSID;
+            m_XMLConfConnEle.dbID = dbID;
+            m_XMLConfConnEle.dbPWD = dbPWD; 
+            m_XMLConfConnEle.dbPORT = dbPORT;
         }
         public void SetXMLName(XMLConfNameEnum eleName, string assignName)
         {

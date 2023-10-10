@@ -16,12 +16,13 @@ namespace YMES.FX.MainForm.Base
     [TypeConverter(typeof(MainFormTitlesConverter))]
     public class MainFormDesign : MainFormComponent
     {
-        private const string CN_CATEGORY = "_YMES.Appearance";
+        private const string CN_CATEGORY_APP = "_YMES.Appearance";
+        private const string CN_CATEGORY_DB = "_YMES.DataBase";
         private Image m_LogoImg = Properties.Resources.PB_LOGO;
         private Icon m_AppIcon;
 
         private MsgType m_MsgTypeText = new MsgType("WARNING", "NOTICE", "ERROR", "TRACE");
-        private DB.Base.XMLConfConnEle m_DBXmlElementName = new DB.Base.XMLConfConnEle("DB_CONNECTION", "DBSVR", "DBUID", "DBPWD", "DBSERVICE", "DBPORT");
+        
         
         private Common.DateFormatEnum m_TIT_DateFormat = Common.DateFormatEnum.YYYYMMDD;
         private DateTime m_CurrentTime = DateTime.Now;
@@ -52,31 +53,70 @@ namespace YMES.FX.MainForm.Base
         private string m_Exit_Dlg_Title= "Exit of Program";
         private string m_Exit_Dlg_Contents= "Do you want to exit program?";
 
-        [System.ComponentModel.Category(CN_CATEGORY)]
-        public DB.Base.XMLConfConnEle DBXmlElementName
+
+        private string m_Xml_DBKind_NM = "DB_CONNECTION";
+        private string m_Xml_DBSvr_NM = "DBSVR";
+        private string m_Xml_DBID_NM = "DBUID";
+        private string m_Xml_DBPWD_NM = "DBPWD";
+        private string m_Xml_DBSID_NM = "DBSERVICE";
+        private string m_Xml_DBPort_NM = "DBPORT";
+
+
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBKind_NM
         {
-            get { return m_DBXmlElementName; }
-            set { m_DBXmlElementName = value; }
+            get { return m_Xml_DBKind_NM; }
+            set { m_Xml_DBKind_NM = value; }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBSvr_NM
+        {
+            get { return m_Xml_DBSvr_NM; }
+            set { m_Xml_DBSvr_NM = value; }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBID_NM
+        {
+            get { return m_Xml_DBID_NM; }
+            set { m_Xml_DBID_NM = value; }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBPWD_NM
+        {
+            get { return m_Xml_DBPWD_NM; }
+            set { m_Xml_DBPWD_NM = value; }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBSID_NM
+        {
+            get { return m_Xml_DBSID_NM; }
+            set { m_Xml_DBSID_NM = value; }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_DB)]
+        public string Xml_DBPort_NM
+        {
+            get { return m_Xml_DBPort_NM; }
+            set { m_Xml_DBPort_NM = value; }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string Exit_Dlg_Title
         {
             get { return m_Exit_Dlg_Title; }
             set { m_Exit_Dlg_Title = value; }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string DuplicatedRunMsg
         {
             get { return m_DuplicatedRunMsg; }
             set { m_DuplicatedRunMsg = value; }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string DuplicatedRunTitle
         {
             get { return m_DuplicatedRunTitle; }
             set { m_DuplicatedRunTitle = value; }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string Exit_Dlg_Contents
         {
             get { return m_Exit_Dlg_Contents; }
@@ -149,7 +189,7 @@ namespace YMES.FX.MainForm.Base
 
         }
 
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Image LogoImg
         {
             get { return m_LogoImg; }
@@ -162,7 +202,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Icon AppIcon
         {
             get { return m_AppIcon; }
@@ -175,7 +215,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Plant
         {
             get { return m_TIT_Plant; }
@@ -189,7 +229,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Plant_FONT
         {
             get { return m_TIT_Plant_FONT; }
@@ -202,7 +242,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Line
         {
             get { return m_TIT_Line; }
@@ -216,7 +256,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Line_FONT
         {
             get { return m_TIT_Line_FONT; }
@@ -229,7 +269,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Station
         {
             get { return m_TIT_Station; }
@@ -243,7 +283,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Station_FONT
         {
             get { return m_TIT_Station_FONT; }
@@ -256,7 +296,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_WorkStandard
         {
             get { return m_TIT_WorkStandard; }
@@ -270,7 +310,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_WorkStandard_FONT
         {
             get { return m_TIT_WorkStandard_FONT; }
@@ -283,7 +323,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Result
         {
             get { return m_TIT_Result; }
@@ -297,7 +337,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Result_FONT
         {
             get { return m_TIT_Result_FONT; }
@@ -310,7 +350,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Exit
         {
             get { return m_TIT_Exit; }
@@ -324,7 +364,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Exit_FONT
         {
             get { return m_TIT_Exit_FONT; }
@@ -337,7 +377,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string TIT_Config
         {
             get { return m_TIT_Config; }
@@ -351,7 +391,7 @@ namespace YMES.FX.MainForm.Base
             }
 
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public Font TIT_Config_FONT
         {
             get { return m_TIT_Config_FONT; }
@@ -364,7 +404,7 @@ namespace YMES.FX.MainForm.Base
                 }
             }
         }
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public DateFormatEnum TIT_DateFormat
         {
             get { return m_TIT_DateFormat; }
@@ -376,7 +416,7 @@ namespace YMES.FX.MainForm.Base
             }
         }
         
-        [System.ComponentModel.Category(CN_CATEGORY)]
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public MsgType MsgTypeText
         {
             get { return m_MsgTypeText; }

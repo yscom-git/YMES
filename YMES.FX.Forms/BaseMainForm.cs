@@ -219,7 +219,15 @@ namespace YMES.FX.MainForm
                     default:
                         throw new Exception("DB Type Error");
                 }
-                m_DBHelper.XMLConfConnEle = MainFrmDesign.DBXmlElementName;
+                m_DBHelper.SetXMLName
+                    (
+                        MainFrmDesign.Xml_DBKind_NM
+                        , MainFrmDesign.Xml_DBSvr_NM
+                        , MainFrmDesign.Xml_DBID_NM
+                        , MainFrmDesign.Xml_DBPWD_NM
+                        , MainFrmDesign.Xml_DBSID_NM
+                        , MainFrmDesign.Xml_DBPort_NM
+                    );
                 return m_DBHelper.Open(m_XMLConfigFile);
             }
             catch (Exception eLog)

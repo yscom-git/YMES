@@ -31,14 +31,16 @@ namespace YMES.FX.DB.Base
             this.m_dbPORT = "DBPORT";
 
         }
-        private string m_dbKind;
-        private string m_dbServer;
-        private string m_dbID;
-        private string m_dbPWD;
-        private string m_dbSID;
-        private string m_dbPORT;
+        private string m_dbKind="";
+        private string m_dbServer = "";
+        private string m_dbID = "";
+        private string m_dbPWD = "";
+        private string m_dbSID = "";
+        private string m_dbPORT = "";
 
-
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbKind
         {
             get
@@ -50,6 +52,9 @@ namespace YMES.FX.DB.Base
                 m_dbKind = value;
             }
         }
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbServer
         {
             get
@@ -61,6 +66,9 @@ namespace YMES.FX.DB.Base
                 m_dbServer = value;
             }
         }
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbID
         {
             get
@@ -72,6 +80,9 @@ namespace YMES.FX.DB.Base
                 m_dbID = value;
             }
         }
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbPWD
         {
             get
@@ -83,6 +94,9 @@ namespace YMES.FX.DB.Base
                 m_dbPWD = value;
             }
         }
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbSID
         {
             get
@@ -94,6 +108,9 @@ namespace YMES.FX.DB.Base
                 m_dbSID = value;
             }
         }
+        [Browsable(true)]
+        [NotifyParentProperty(true)]
+        [DefaultValue(null)]
         public string dbPORT
         {
             get
