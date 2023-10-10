@@ -14,6 +14,8 @@ namespace YMES.FX.DB
     [ToolboxItem(true)]
     public class AccessHelper : DBComponent, IDBBase
     {
+        
+        
         private string m_strDB = "";
         private OleDbConnection m_DBConn = null;
         private bool m_IsOpen = false;
@@ -30,84 +32,7 @@ namespace YMES.FX.DB
             set { m_IsOpen = value; }
         }
 
-        string IDBBase.OutRefCurString
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        string IDBBase.DBSVR
-        {
-            get
-            {
-                return m_strDB;
-            }
-        }
-
-        string IDBBase.DBUID
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        string IDBBase.DBPWD
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        string IDBBase.DBNM
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        bool IDBBase.IsDBTrace
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        bool IDBBase.IsAsynBusy
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        DBOpenEnum IDBBase.DBOpenTY
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+         
 
         public AccessHelper(string strDB)
         {
@@ -210,7 +135,11 @@ namespace YMES.FX.DB
             m_strDB = path;
             return OpenDB();
         }
-
+        bool IDBBase.Open(string svr, string uid, string pwd, string dbnm, string port)
+        {
+            m_strDB = svr;
+            return OpenDB();
+        }
         bool IDBBase.Open(string svr, string uid, string pwd, string dbnm)
         {
             m_strDB = svr;
@@ -258,26 +187,12 @@ namespace YMES.FX.DB
         }
 
 
-        public bool IsOciConnect
-        {
-            get { return false; }
-        }
-
-        /*
-        public event BackgroundRCV OnBackgroundRCV;
-
-        public event BackgroundPR OnBackgroundPR;
-        */
 
         bool IDBBase.AsynBusy(object key)
         {
             return false;
         }
 
-        bool IDBBase.IsOciConnect
-        {
-            get { throw new NotImplementedException(); }
-        }
 
         event BackgroundRCV IDBBase.OnBackgroundRCV
         {

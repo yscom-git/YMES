@@ -393,6 +393,7 @@
             // 
             this.MainFrmDesign.AppIcon = null;
             this.MainFrmDesign.ContainerControl = this;
+            
             this.MainFrmDesign.DuplicatedRunMsg = "Duplicated Application";
             this.MainFrmDesign.DuplicatedRunTitle = "Violated Run";
             this.MainFrmDesign.Exit_Dlg_Contents = "Do you want to exit program?";

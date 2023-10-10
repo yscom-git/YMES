@@ -39,7 +39,7 @@
             // CustomizedMainFrm
             // 
             this.AppIcon = ((System.Drawing.Icon)(resources.GetObject("$this.AppIcon")));
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(919, 644);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -30,6 +30,8 @@ namespace YMES.FX.MainForm
         private bool m_AllowDuplicatedRun = false;
         private BaseContainer m_ChildBC = null;
         private DataTable m_XMLConfigDT = null;
+        
+        
         [Category(CN_CATEGORY)]
         public bool AllowDuplicatedRun
         {
@@ -177,8 +179,6 @@ namespace YMES.FX.MainForm
 
         protected override void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-
             if (DesignMode == false)
             {
                 OpenInitialConfig();
@@ -188,8 +188,10 @@ namespace YMES.FX.MainForm
                 }
                 CheckDuplicatedRun(AllowDuplicatedRun);
                 TmrTimeBase.Start();
-                
             }
+
+            base.OnLoad(e);
+
         }
         private bool ConnectDB()
         {
@@ -217,7 +219,8 @@ namespace YMES.FX.MainForm
                     default:
                         throw new Exception("DB Type Error");
                 }
-                return DBHelper.Open(m_XMLConfigFile);
+                m_DBHelper.XMLConfConnEle = MainFrmDesign.DBXmlElementName;
+                return m_DBHelper.Open(m_XMLConfigFile);
             }
             catch (Exception eLog)
             {

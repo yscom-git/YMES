@@ -57,6 +57,7 @@
     <Compile Include="Base\DEF.cs" />
     <Compile Include="Base\IDBBase.cs" />
     <Compile Include="Base\Util.cs" />
+    <Compile Include="Base\XMLConfConnEle.cs" />
     <Compile Include="CommonHelper.cs">
       <SubType>Component</SubType>
     </Compile>

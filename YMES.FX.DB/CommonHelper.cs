@@ -49,70 +49,13 @@ namespace YMES.FX.DB
             get { return m_DBKind; }
             set { m_DBKind = value; }
         }
-        public string OutRefCurString
-        {
-            get
-            {
-                return m_DB.OutRefCurString;
-            }
-            set
-            {
-                m_DB.OutRefCurString = value;
-            }
-        }
+       
             
 
-        public string DBSVR
-        {
-            get { return m_DB.DBSVR; }
-        }
+
+
+
         
-
-        public string DBUID
-        {
-            get { return m_DB.DBUID; }
-        }
-        
-
-        public string DBPWD
-        {
-            get { return m_DB.DBPWD;}
-        }
-        
-
-        public string DBNM
-        {
-            get { return m_DB.DBNM;}
-        }
-        
-
-        public bool IsDBTrace
-        {
-            get { return m_DB.IsDBTrace; }
-            set { m_DB.IsDBTrace = value; }
-        }
-
-        public bool IsAsynBusy
-        {
-            get { return m_DB.IsAsynBusy; }
-        }
-
-        public bool IsOciConnect
-        {
-            get { return m_DB.IsOciConnect; }
-        }
-
-        public DBOpenEnum DBOpenTY 
-        {
-            get
-            {
-                return m_DB.DBOpenTY;
-            }
-            set
-            {
-                m_DB.DBOpenTY = value;
-            }
-        }
 
         public event BackgroundRCV OnBackgroundRCV;
         public event BackgroundPR OnBackgroundPR;
@@ -165,6 +108,10 @@ namespace YMES.FX.DB
         public bool Open(string svr, string uid, string pwd, string dbnm)
         {
             return m_DB.Open(svr, uid, pwd, dbnm);
+        }
+        public bool Open(string svr, string uid, string pwd, string dbnm, string port)
+        {
+            return m_DB.Open(svr, uid, pwd, dbnm, port);
         }
     }
 }

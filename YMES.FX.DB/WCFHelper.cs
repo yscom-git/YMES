@@ -14,27 +14,18 @@ namespace YMES.FX.DB
     [ToolboxItem(true)]
     public class WCFHelper : DBComponent, IDBBase
     {
-        
+        private BackgroundWorker m_backWorker = null;
         public event BackgroundRCV OnBackgroundRCV = null;
 
         public event BackgroundPR OnBackgroundPR = null;
-        private string m_URL = "";
         private WCF.Client m_WCF = null;
-        private string m_IP = "";
-        private string m_PORT = "";
         private int m_resTime = 2000;
-        private string m_DBUID = "";
-        private string m_OutRefCurString = "OUT_CURSOR";
         private DBOpenEnum m_DBOpenTY = DBOpenEnum.XML;
         private bool m_bOpen = false;
         public int ResponseTime
         {
             get { return m_resTime; }
             set { m_resTime = value; }
-        }
-        public string DBUID
-        {
-            get { return m_DBUID; }
         }
         public bool Open(string path = "")
         {
@@ -53,8 +44,8 @@ namespace YMES.FX.DB
                     {
                         if (ds.Tables[0].Rows.Count > 0)
                         {
-                            string uri = ds.Tables[0].Columns.Contains("DBNAME") ? ds.Tables[0].Rows[0]["DBNAME"].ToString() : "";
-                            string user = ds.Tables[0].Columns.Contains("DBUID") ? ds.Tables[0].Rows[0]["DBUID"].ToString() : "";
+                            string uri = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbServer)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbServer)].ToString() : "";
+                            string user = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbID)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbID)].ToString() : "";
 
                             return OpenClient(uri, user);
                         }
@@ -74,18 +65,18 @@ namespace YMES.FX.DB
         {
             try
             {
-                m_URL = uri;
-                m_DBUID = user;
-                string[] parURL = m_URL.Trim().ToLower().Replace("http://", "").Replace("https://", "").Split(':');
+                m_DBConnInfor.SVR = uri;
+                m_DBConnInfor.ID = user;
+                string[] parURL = uri.Trim().ToLower().Replace("http://", "").Replace("https://", "").Split(':');
                 if (parURL.Length > 0)
                 {
-                    m_IP = parURL[0];
-                    m_PORT = parURL[1].Trim().Split('/')[0];
-                    m_WCF = new WCF.Client(m_URL, m_IP, m_PORT, m_resTime);
+                    m_DBConnInfor.SID = parURL[0];
+                    m_DBConnInfor.PORT = parURL[1].Trim().Split('/')[0];
+                    m_WCF = new WCF.Client(uri, m_DBConnInfor.SVR, m_DBConnInfor.PORT, m_resTime);
                 }
                 else
                 {
-                    throw new Exception("URL Error:" + m_URL);
+                    throw new Exception("URL Error:" + uri);
                 }
                 m_bOpen = true;
                 return true;
@@ -100,7 +91,7 @@ namespace YMES.FX.DB
         {
             return -1;
         }
-        public bool Open(string svr, string uid, string pwd, string dbnm)
+        public bool Open(string svr, string uid, string pwd, string dbnm, string port)
         {
             try
             {
@@ -114,6 +105,10 @@ namespace YMES.FX.DB
                 return false;
 
             }
+        }
+        public bool Open(string svr, string uid, string pwd, string dbnm)
+        {
+            return Open(svr, uid, pwd, dbnm, m_DBConnInfor.PORT);
         }
 
         public bool Close()
@@ -180,7 +175,6 @@ namespace YMES.FX.DB
             return nRet;
         }
 
-        BackgroundWorker m_backWorker = null;
         Dictionary<object, BackgroundWorker> m_dicBackWK = new Dictionary<object, BackgroundWorker>();
         public void AsyncExecute(DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
@@ -214,6 +208,11 @@ namespace YMES.FX.DB
                         rst.qt = qt;
                         rst.sender = sender;
                         m_backWorker.RunWorkerAsync(rst);
+                        m_IsAsynBusy = false;
+                    }
+                    else
+                    {
+                        m_IsAsynBusy = true;
                     }
                 }
                 else
@@ -241,7 +240,12 @@ namespace YMES.FX.DB
                             rst.qt = qt;
                             rst.sender = sender;
                             m_dicBackWK[sender].RunWorkerAsync(rst);
+                            m_IsAsynBusy = false;
 
+                        }
+                        else
+                        {
+                            m_IsAsynBusy = true;
                         }
                     }
                 }
@@ -279,6 +283,10 @@ namespace YMES.FX.DB
             catch (Exception eLog)
             {
                 Debug.WriteLine("[" + System.Reflection.MethodBase.GetCurrentMethod().Name + "]" + eLog.Message);
+            }
+            finally
+            {
+                m_IsAsynBusy = false;
             }
 
         }
@@ -333,62 +341,8 @@ namespace YMES.FX.DB
 
         }
 
-        public string OutRefCurString
-        {
-            get { return m_OutRefCurString; }
-            set { m_OutRefCurString = value; }
-        }
-
-        public string DBSVR
-        {
-            get { return m_IP; }
-        }
-
-        public string DBPWD
-        {
-            get { return ""; }
-        }
-
-        public string DBNM
-        {
-            get { return m_PORT; }
-        }
-
-        public bool IsDBTrace
-        {
-            get
-            {
-                return false;
-            }
-            set
-            {
-                ;
-            }
-        }
-        public bool IsOciConnect
-        {
-            get { return false; }
-        }
-        public bool IsAsynBusy
-        {
-            get { return m_backWorker == null ? false : m_backWorker.IsBusy; }
-        }
-
-        public DBOpenEnum DBOpenTY
-        {
-            get
-            {
-                return m_DBOpenTY;
-            }
-            set
-            {
-                m_DBOpenTY = value;
-            }
-        }
-
-
-
-
+       
+      
         public bool AsynBusy(object key)
         {
 

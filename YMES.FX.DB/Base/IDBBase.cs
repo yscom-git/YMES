@@ -1,13 +1,10 @@
 ﻿
 using System.Collections.Generic;
-
 using System.Data;
-using System.ComponentModel;
 
 namespace YMES.FX.DB.Base
 {
-    public delegate void BackgroundRCV(object sender, string query, Dictionary<string, string> param, DataTable dt);
-    public delegate void BackgroundPR(object sender, ProgressChangedEventArgs e);
+    
     /// <summary>
     /// DataBase I/F
     /// </summary>
@@ -21,6 +18,7 @@ namespace YMES.FX.DB.Base
         /// <returns>Is Open</returns>
         bool Open(string path = "");
         bool Open(string svr, string uid, string pwd, string dbnm);
+        bool Open(string svr, string uid, string pwd, string dbnm, string port);
         /// <summary>
         /// DB Close
         /// </summary>
@@ -58,19 +56,6 @@ namespace YMES.FX.DB.Base
 
         void AsyncExecute(object sender, DBQueryTypeEnum qt, string query, Dictionary<string, string> param);
        
-        string XMLConfigPath { get; set; }
-        string OutRefCurString { get; set; }
-        string DBSVR { get; }
-        string DBUID { get; }
-        string DBPWD { get; }
-        string DBNM { get; }
-        bool IsDBTrace { get; set; }
-        bool IsAsynBusy { get; }
-        bool IsOciConnect { get; }
-        DBOpenEnum DBOpenTY { get; set; }
-
-
-
         event BackgroundRCV OnBackgroundRCV;
 
         event BackgroundPR OnBackgroundPR;

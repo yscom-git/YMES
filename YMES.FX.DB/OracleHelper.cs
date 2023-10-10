@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
 using YMES.FX.DB.Base;
 
 namespace YMES.FX.DB
@@ -21,39 +22,10 @@ namespace YMES.FX.DB
         public event BackgroundRCV OnBackgroundRCV = null;
 
         public event BackgroundPR OnBackgroundPR = null;
-        private string m_OutRefCurString = "OUT_CURSOR";
-        private string m_DBSVR = "";
-        private string m_DBUID = "";
-        private string m_DBPWD = "";
-        private string m_DBNM = "";
-        private bool m_IsOciConnect = true;
-        private DBOpenEnum m_DBOpenTY = DBOpenEnum.XML;
 
-        private bool m_IsDBTrace = false;
-
-        public bool IsDBTrace
-        {
-            get { return m_IsDBTrace; }
-            set { m_IsDBTrace = value; }
-        }
+        private BackgroundWorker m_backWorker = null;
 
 
-        public DBOpenEnum DBOpenTY
-        {
-            get
-            {
-                return m_DBOpenTY;
-            }
-            set
-            {
-                m_DBOpenTY = value;
-            }
-        }
-
-        public bool IsAsynBusy
-        {
-            get { return m_backWorker == null ? false : m_backWorker.IsBusy; }
-        }
 
         public bool AsynBusy(object key)
         {
@@ -76,51 +48,31 @@ namespace YMES.FX.DB
             }
             return null;
         }
-        public bool IsOciConnect
-        {
-            get { return m_IsOciConnect; }
-        }
-        public string DBSVR
-        {
-            get { return m_DBSVR; }
-        }
-        public string DBUID
-        {
-            get { return m_DBUID; }
-        }
-        public string DBPWD
-        {
-            get { return m_DBPWD; }
-        }
-        public string DBNM
-        {
-            get { return m_DBNM; }
-        }
-        public string OutRefCurString
-        {
-            get { return m_OutRefCurString; }
-            set { m_OutRefCurString = value; }
-        }
        
         private Oracle.ManagedDataAccess.Client.OracleConnection m_Conn = null;
         public bool Open(string svr, string uid, string pwd, string dbnm)
         {
+            return Open(svr, uid, pwd, dbnm, "1521");
+        }
+        public bool Open(string svr, string uid, string pwd, string dbnm, string port)
+        {
             try
             {
 
-                m_DBSVR = svr;
-                m_DBUID = uid;
-                m_DBPWD = pwd;
-                m_DBNM = dbnm;
-                string[] spDBName = m_DBSVR.Split('.');
+                m_DBConnInfor.SVR = svr;
+                m_DBConnInfor.ID = uid;
+                m_DBConnInfor.PWD = pwd;
+                m_DBConnInfor.SID = dbnm;
+                m_DBConnInfor.PORT = port;
+                string[] spDBName = svr.Split('.');
                 if (spDBName.Length < 3)
                 {
-                    m_Conn = new OracleConnection(string.Format("Data Source={0};Persist Security Info=False;User ID={1};Password={2}", m_DBSVR, DBUID, DBPWD));
-                    m_IsOciConnect = true;
+                    m_Conn = new OracleConnection(string.Format("Data Source={0};Persist Security Info=False;User ID={1};Password={2}", svr, uid, pwd));
+                    IsOciConnect = true;
                 }
                 else
                 {
-                    string[] svrs = m_DBSVR.Split(';');
+                    string[] svrs = svr.Split(';');
                     if (svrs.Length > 1)
                     {
                         m_Conn = new OracleConnection(
@@ -132,15 +84,15 @@ namespace YMES.FX.DB
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {0} )
-                                                    ( PORT = 1521 ) ) 
+                                                    ( PORT = {5} ) ) 
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {1} )
-                                                    ( PORT = 1521 ) ) )
+                                                    ( PORT = {5} ) ) )
                                                 ( CONNECT_DATA = 
                                                     ( SERVER = DEDICATED )
                                                     ( SERVICE_NAME = {2} ) ) )
-                                        ; User Id= {3}; Password = {4};", svrs[0], svrs[1], DBNM, DBUID, DBPWD)
+                                        ; User Id= {3}; Password = {4};", svrs[0], svrs[1], dbnm, uid, pwd, port)
                                                                           );
                     }
                     else
@@ -153,15 +105,15 @@ namespace YMES.FX.DB
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {0} )
-                                                    ( PORT = 1521 ) ) )
+                                                    ( PORT = {4} ) ) )
                                                 ( CONNECT_DATA = 
                                                     ( SERVER = DEDICATED )
                                                     ( SERVICE_NAME = {1} ) ) )
-                                        ; User Id= {2}; Password = {3};", DBSVR, DBNM, DBUID, DBPWD)
+                                        ; User Id= {2}; Password = {3};", svr, dbnm, uid, pwd, port)
                                                                             );
 
                     }
-                    m_IsOciConnect = false;
+                    IsOciConnect = false;
 
                 }
                 m_Conn.Open();
@@ -193,20 +145,22 @@ namespace YMES.FX.DB
                     {
                         if (ds.Tables[0].Rows.Count > 0)
                         {
-                            m_DBSVR = ds.Tables[0].Columns.Contains("DBNAME") ? ds.Tables[0].Rows[0]["DBNAME"].ToString() : "";
-                            m_DBUID = ds.Tables[0].Columns.Contains("DBUID") ? ds.Tables[0].Rows[0]["DBUID"].ToString() : "";
-                            m_DBPWD = ds.Tables[0].Columns.Contains("DBPWD") ? ds.Tables[0].Rows[0]["DBPWD"].ToString() : "";
-                            m_DBNM = ds.Tables[0].Columns.Contains("DBSERVICE") ? ds.Tables[0].Rows[0]["DBSERVICE"].ToString() : "";
-                            string[] spDBName = DBSVR.Split('.');
+                            m_DBConnInfor.SVR = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbServer)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbServer)].ToString() : "";
+                            m_DBConnInfor.ID = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbID)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbID)].ToString() : "";
+                            m_DBConnInfor.PWD = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbPWD)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbPWD)].ToString() : "";
+                            m_DBConnInfor.SID = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbSID)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbSID)].ToString() : "";
+                            m_DBConnInfor.PORT = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbPORT)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbPORT)].ToString() : "";
+                            string[] spDBName = m_DBConnInfor.SVR.Split('.');
                             if (spDBName.Length < 3)
                             {
-                                m_Conn = new OracleConnection(string.Format("Data Source={0};Persist Security Info=False;User ID={1};Password={2}", m_DBSVR, DBUID, DBPWD));
-                                m_IsOciConnect = true;
+                                m_Conn = new OracleConnection(string.Format("Data Source={0};Persist Security Info=False;User ID={1};Password={2}"
+                                        , m_DBConnInfor.SVR, m_DBConnInfor.ID, m_DBConnInfor.PWD));
+                                IsOciConnect = true;
                             }
                             else
                             {
 
-                                string[] svrs = m_DBSVR.Split(';');
+                                string[] svrs = m_DBConnInfor.SVR.Split(';');
                                 if (svrs.Length > 1)
                                 {
                                     m_Conn = new OracleConnection(
@@ -218,15 +172,15 @@ namespace YMES.FX.DB
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {0} )
-                                                    ( PORT = 1521 ) ) 
+                                                    ( PORT = {5} ) ) 
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {1} )
-                                                    ( PORT = 1521 ) ) )
+                                                    ( PORT = {5} ) ) )
                                                 ( CONNECT_DATA = 
                                                     ( SERVER = DEDICATED )
                                                     ( SERVICE_NAME = {2} ) ) )
-                                        ; User Id= {3}; Password = {4};", svrs[0], svrs[1], DBNM, DBUID, DBPWD)
+                                        ; User Id= {3}; Password = {4};", svrs[0], svrs[1], m_DBConnInfor.SID, m_DBConnInfor.ID, m_DBConnInfor.PWD, m_DBConnInfor.PORT)
                                                                                       );
                                 }
                                 else
@@ -239,15 +193,15 @@ namespace YMES.FX.DB
                                                 ( ADDRESS =
                                                     ( PROTOCOL = TCP )
                                                     ( HOST = {0} )
-                                                    ( PORT = 1521 ) ) )
+                                                    ( PORT = {4} ) ) )
                                                 ( CONNECT_DATA = 
                                                     ( SERVER = DEDICATED )
                                                     ( SERVICE_NAME = {1} ) ) )
-                                        ; User Id= {2}; Password = {3};", DBSVR, DBNM, DBUID, DBPWD)
+                                        ; User Id= {2}; Password = {3};", m_DBConnInfor.SVR, m_DBConnInfor.SID, m_DBConnInfor.ID, m_DBConnInfor.PWD, m_DBConnInfor.PORT)
                                                                                         );
 
                                 }
-                                m_IsOciConnect = false;
+                                IsOciConnect = false;
 
                             }
 
@@ -632,7 +586,7 @@ namespace YMES.FX.DB
         }
 
 
-        BackgroundWorker m_backWorker = null;
+        
         Dictionary<object, BackgroundWorker> m_dicBackWK = new Dictionary<object, BackgroundWorker>();
         public void AsyncExecute(DBQueryTypeEnum qt, string query, Dictionary<string, string> param)
         {
@@ -666,6 +620,11 @@ namespace YMES.FX.DB
                         rst.qt = qt;
                         rst.sender = sender;
                         m_backWorker.RunWorkerAsync(rst);
+                        m_IsAsynBusy = false;
+                    }
+                    else
+                    {
+                        m_IsAsynBusy = true;
                     }
                 }
                 else
@@ -693,7 +652,11 @@ namespace YMES.FX.DB
                             rst.qt = qt;
                             rst.sender = sender;
                             m_dicBackWK[sender].RunWorkerAsync(rst);
-
+                            m_IsAsynBusy = false;
+                        }
+                        else
+                        {
+                            m_IsAsynBusy = true;
                         }
                     }
                 }
@@ -731,6 +694,10 @@ namespace YMES.FX.DB
             catch (Exception eLog)
             {
                 Debug.WriteLine("[" + System.Reflection.MethodBase.GetCurrentMethod().Name + "]" + eLog.Message);
+            }
+            finally
+            {
+                m_IsAsynBusy = false;
             }
 
         }

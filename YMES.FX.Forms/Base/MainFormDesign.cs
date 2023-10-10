@@ -21,6 +21,8 @@ namespace YMES.FX.MainForm.Base
         private Icon m_AppIcon;
 
         private MsgType m_MsgTypeText = new MsgType("WARNING", "NOTICE", "ERROR", "TRACE");
+        private DB.Base.XMLConfConnEle m_DBXmlElementName = new DB.Base.XMLConfConnEle("DB_CONNECTION", "DBSVR", "DBUID", "DBPWD", "DBSERVICE", "DBPORT");
+        
         private Common.DateFormatEnum m_TIT_DateFormat = Common.DateFormatEnum.YYYYMMDD;
         private DateTime m_CurrentTime = DateTime.Now;
         private IMainFormDesign m_Parent;
@@ -49,6 +51,13 @@ namespace YMES.FX.MainForm.Base
         private string m_DuplicatedRunTitle = "Violated Run";
         private string m_Exit_Dlg_Title= "Exit of Program";
         private string m_Exit_Dlg_Contents= "Do you want to exit program?";
+
+        [System.ComponentModel.Category(CN_CATEGORY)]
+        public DB.Base.XMLConfConnEle DBXmlElementName
+        {
+            get { return m_DBXmlElementName; }
+            set { m_DBXmlElementName = value; }
+        }
         [System.ComponentModel.Category(CN_CATEGORY)]
         public string Exit_Dlg_Title
         {
@@ -136,6 +145,7 @@ namespace YMES.FX.MainForm.Base
             m_TIT_WorkStandard = "WORK\r\nSTANDARD";
             m_TIT_WorkStandard_FONT = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
             m_LogoImg = Properties.Resources.PB_LOGO;
+            
 
         }
 
