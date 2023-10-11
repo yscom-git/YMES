@@ -4,11 +4,11 @@
 	<CORCD>5200</CORCD><!--Corporation Code-->
 	<BIZCD>5210</BIZCD><!--Business Code-->
 	
-	<DB_CONNECTION>WCF</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->	
-	<SVR>http://wcf.yscom.co.kr:1818/wcf</SVR><!--DB Server IP-->
-	<DBUID></DBUID><!--DB User ID-->
-	<DBPWD></DBPWD><!--DB User Password-->
-	<DBSERVICE></DBSERVICE><!--DB Service(Oracle)-->	
+	<DB_CONNECTION>ORACLE</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->	
+	<SVR>db.yscom.co.kr</SVR><!--DB Server IP-->
+	<DBUID>system</DBUID><!--DB User ID-->
+	<DBPWD>khj1122ys</DBPWD><!--DB User Password-->
+	<DBSERVICE>ysora</DBSERVICE><!--DB Service(Oracle)-->	
 	
 	
 	<DEBUG_CLIENT>@MES.TagPrt_PartCheck</DEBUG_CLIENT><!--Client IP or @namespace.BC-->

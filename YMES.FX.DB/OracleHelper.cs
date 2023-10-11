@@ -149,7 +149,7 @@ namespace YMES.FX.DB
                             m_DBConnInfor.ID = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbID)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbID)].ToString() : "";
                             m_DBConnInfor.PWD = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbPWD)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbPWD)].ToString() : "";
                             m_DBConnInfor.SID = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbSID)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbSID)].ToString() : "";
-                            m_DBConnInfor.PORT = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbPORT)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbPORT)].ToString() : "";
+                            m_DBConnInfor.PORT = ds.Tables[0].Columns.Contains(GetXMLName(XMLConfNameEnum.dbPORT)) ? ds.Tables[0].Rows[0][GetXMLName(XMLConfNameEnum.dbPORT)].ToString() : "1521";
                             string[] spDBName = m_DBConnInfor.SVR.Split('.');
                             if (spDBName.Length < 3)
                             {

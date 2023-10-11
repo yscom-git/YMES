@@ -15,7 +15,7 @@ namespace YMES.FX.DB.Base
     {
 
         protected bool m_IsAsynBusy = false;
-        private XMLConfEleNameST m_XMLConfConnEle;
+        private XMLConfEleNameST m_XMLConfConnEle =new XMLConfEleNameST();
         protected DBConntionInforST m_DBConnInfor;
         private bool m_IsOciConnect = false;
         private string m_OutRefCurString = "OUT_CURSOR";

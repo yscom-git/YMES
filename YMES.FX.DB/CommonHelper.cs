@@ -10,10 +10,10 @@ using YMES.FX.DB.Base;
 namespace YMES.FX.DB
 {
     [ToolboxItem(true)]
-    public  class CommonHelper : DBComponent, IDBBase
+    public  class CommonHelper 
     {
         private IDBBase m_DB;
-
+        
         public CommonHelper()
         {
             AssignDBType(m_DBKind);
@@ -26,6 +26,7 @@ namespace YMES.FX.DB
         }
         private void AssignDBType(DBKindEnum ty)
         {
+            
             m_DBKind = ty;
             switch (ty)
             {
@@ -42,7 +43,17 @@ namespace YMES.FX.DB
                     m_DB = new AccessHelper();
                     break;
             }
+            
+
         }
+        public void SetXMLName(string dbKind, string dbServer, string dbID, string dbPWD, string dbSID, string dbPORT)
+        {
+            if(m_DB is DB.Base.DBComponent)
+            {
+                ((DB.Base.DBComponent)m_DB).SetXMLName(dbKind, dbServer, dbID, dbPWD, dbSID, dbPORT);
+            }
+        }
+
         private DBKindEnum m_DBKind = DBKindEnum.Oracle;
         public DBKindEnum DBKind
         {
@@ -50,15 +61,6 @@ namespace YMES.FX.DB
             set { m_DBKind = value; }
         }
        
-            
-
-
-
-
-        
-
-        public event BackgroundRCV OnBackgroundRCV;
-        public event BackgroundPR OnBackgroundPR;
 
         public bool AsynBusy(object key)
         {
