@@ -198,7 +198,7 @@ namespace YMES.FX.MainForm
                 OpenInitialConfig();
                 if (ConnectDB() == false)
                 {
-                    StatusBarMsg(Common.MsgTypeEnum.Error, "DB Connection Error", System.Reflection.MethodBase.GetCurrentMethod().Name, true);
+                    StatusBarMsg(Common.MsgTypeEnum.Error, MainFrmDesign.Error_DB_Connection, System.Reflection.MethodBase.GetCurrentMethod().Name, true);
                 }
                 CheckDuplicatedRun(AllowDuplicatedRun);
                 InitDesign();
@@ -214,10 +214,13 @@ namespace YMES.FX.MainForm
             if(IsDebugMode)
             {
                 lbl_Bizcd.BackColor = Color.Green;
+                WindowState = FormWindowState.Normal;
+                this.StartPosition = FormStartPosition.CenterScreen;
             }
             else
             {
                 lbl_Bizcd.BackColor = Color.Brown;
+                WindowState = FormWindowState.Maximized;
             }
         }
 

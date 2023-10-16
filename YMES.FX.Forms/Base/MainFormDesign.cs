@@ -59,7 +59,7 @@ namespace YMES.FX.MainForm.Base
         private string m_DuplicatedRunTitle = "Violated Run";
         private string m_Exit_Dlg_Title= "Exit of Program";
         private string m_Exit_Dlg_Contents= "Do you want to exit program?";
-
+        private string m_Error_DB_Connection = "DB Connection Error";
 
         private string m_Xml_DBKind_NM = "DB_CONNECTION";
         private string m_Xml_DBSvr_NM = "DBSVR";
@@ -67,6 +67,13 @@ namespace YMES.FX.MainForm.Base
         private string m_Xml_DBPWD_NM = "DBPWD";
         private string m_Xml_DBSID_NM = "DBSERVICE";
         private string m_Xml_DBPort_NM = "DBPORT";
+
+        [Category(CN_CATEGORY_DB)]
+        public string Error_DB_Connection
+        {
+            get { return m_Error_DB_Connection; }
+            set { m_Error_DB_Connection = value; }
+        }
 
         [Category(CN_CATEGORY_DB)]
         public string XMLConfigFile
