@@ -1,6 +1,6 @@
-﻿namespace YMES.DEPLOY.MES
+﻿namespace YMES.Logics.Base
 {
-    partial class TagPrt_PartCheck
+    partial class LocalizedContainer
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,15 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // TagPrt_PartCheck
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "TagPrt_PartCheck";
-            this.ResumeLayout(false);
-
         }
 
         #endregion

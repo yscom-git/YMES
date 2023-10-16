@@ -20,8 +20,9 @@ namespace YMES.FX.MainForm
     public partial class BaseMainForm : Form, IMainFormDesign
     {
         private YMES.FX.DB.CommonHelper m_DBHelper = null;
-        private string m_XMLConfigFile = @".\Config.xml";
+        
         private const string CN_CATEGORY = "_YMES";
+        
         private Point m_MouseMovePoint = new Point();
         private bool m_bMoveMouse = false;
 
@@ -38,12 +39,7 @@ namespace YMES.FX.MainForm
             get { return m_AllowDuplicatedRun; }
             set { m_AllowDuplicatedRun = value; }
         }
-        [Category(CN_CATEGORY)]
-        public string XMLConfigFile
-        {
-            get { return m_XMLConfigFile; }
-            set { m_XMLConfigFile = value; }
-        }
+        
         [Browsable(false)]
         public YMES.FX.DB.CommonHelper DBHelper
         {
@@ -176,6 +172,24 @@ namespace YMES.FX.MainForm
             }
             return "";
         }
+        public bool IsDebugMode
+        {
+            get
+            {
+                string val = GetXMLConfig(MainFrmDesign.XMLDebugModeEleName);
+                bool bret = false;
+                switch(val.ToUpper().Trim())
+                {
+                    case "Y":
+                    case "TRUE":
+                    case "YES":
+                    case "T":
+                        bret = true;
+                        break;
+                }                
+                return bret;
+            }
+        }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -187,12 +201,26 @@ namespace YMES.FX.MainForm
                     StatusBarMsg(Common.MsgTypeEnum.Error, "DB Connection Error", System.Reflection.MethodBase.GetCurrentMethod().Name, true);
                 }
                 CheckDuplicatedRun(AllowDuplicatedRun);
+                InitDesign();
                 TmrTimeBase.Start();
+                
             }
 
             base.OnLoad(e);
 
         }
+        protected virtual void InitDesign()
+        {
+            if(IsDebugMode)
+            {
+                lbl_Bizcd.BackColor = Color.Green;
+            }
+            else
+            {
+                lbl_Bizcd.BackColor = Color.Brown;
+            }
+        }
+
         private bool ConnectDB()
         {
             try
@@ -200,7 +228,7 @@ namespace YMES.FX.MainForm
                 string strDBType = GetXMLConfig("DB_CONNECTION").ToUpper();
                 if (string.IsNullOrEmpty(strDBType))
                 {
-                    throw new Exception("Config file error:" + m_XMLConfigFile);
+                    throw new Exception("Config file error:" + MainFrmDesign.XMLConfigFile);
                 }
                 switch (strDBType)
                 {
@@ -228,7 +256,7 @@ namespace YMES.FX.MainForm
                         , MainFrmDesign.Xml_DBSID_NM
                         , MainFrmDesign.Xml_DBPort_NM
                     );
-                return m_DBHelper.Open(m_XMLConfigFile);
+                return m_DBHelper.Open(MainFrmDesign.XMLConfigFile);
             }
             catch (Exception eLog)
             {
@@ -240,9 +268,9 @@ namespace YMES.FX.MainForm
         {
             try
             {
-                if (File.Exists(XMLConfigFile))
+                if (File.Exists(MainFrmDesign.XMLConfigFile))
                 {
-                    m_XMLConfigDT = Base.Common.GetXml2DT(XMLConfigFile);
+                    m_XMLConfigDT = Base.Common.GetXml2DT(MainFrmDesign.XMLConfigFile);
                 }
                 else
                 {
@@ -398,7 +426,7 @@ namespace YMES.FX.MainForm
                 }
 
 
-                MsgBox msg = new MsgBox(MainFrmDesign.MsgTypeText);
+                MsgBox msg = new MsgBox(this.MainFrmDesign);
 
                 msg.Name = "BaseMainForm_MSG";
                 bool modal = bModal;

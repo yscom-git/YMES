@@ -11,7 +11,7 @@
 	<DBSERVICE></DBSERVICE><!--DB Service(Oracle)-->	
 	
 	
-	<DEBUG_CLIENT>@MES.TagPrt_PartCheck</DEBUG_CLIENT><!--Client IP or @namespace.BC-->
+	<DEBUG_CLIENT>@MES.TagPrint</DEBUG_CLIENT><!--Client IP or @namespace.Container-->
 	<DEBUG_MODE>Y</DEBUG_MODE><!--Debug Mode-->
 </YMES_CONFIG>
 

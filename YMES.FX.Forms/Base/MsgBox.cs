@@ -21,12 +21,11 @@ namespace YMES.FX.MainForm.Base
         private Point m_MouseMovePoint = new Point();
         private bool m_bMoveMouse = false;
 
-        private MsgType m_MsgTypeText = new MsgType("WARNING", "NOTICE", "ERROR", "TRACE");
+        private MainFormDesign m_MainFrmDesign;
         [System.ComponentModel.Category("_YMES.Appearance")]
-        public MsgType MsgTypeText
+        public MainFormDesign MainFrmDesign
         {
-            get { return m_MsgTypeText; }
-            set { m_MsgTypeText = value; }
+            get { return m_MainFrmDesign; }
         }
 
         public enum MsgBtnEnum
@@ -38,13 +37,13 @@ namespace YMES.FX.MainForm.Base
         {
             InitializeComponent();
         }
-        public MsgBox(MsgType cfgMsg)
+        public MsgBox(MainFormDesign cfgMsg)
         {
             InitializeComponent();
            
             if(DesignMode == false)
             {
-                MsgTypeText = cfgMsg;
+                m_MainFrmDesign = cfgMsg;
                 
             }
         }
@@ -73,20 +72,20 @@ namespace YMES.FX.MainForm.Base
                 case Common.MsgTypeEnum.Alarm:
                     Lbl_Icon.BackColor = Color.Blue;
                     Lbl_Icon.ForeColor = Color.White;
-                    Lbl_Icon.Text = this.MsgTypeText.MSG_ALARM;
+                    Lbl_Icon.Text = MainFrmDesign.MsgTy_ALARM;
                     break;
                 case Common.MsgTypeEnum.Error:
                     Lbl_Icon.BackColor = Color.Red;
                     Lbl_Icon.ForeColor = Color.Yellow;
-                    Lbl_Icon.Text = this.MsgTypeText.MSG_ERROR;
+                    Lbl_Icon.Text = MainFrmDesign.MsgTy_ERROR;
                     break;
                 case Common.MsgTypeEnum.Warnning:
                     Lbl_Icon.BackColor = Color.Yellow;
                     Lbl_Icon.ForeColor = Color.Black;
-                    Lbl_Icon.Text = this.MsgTypeText.MSG_WARN;
+                    Lbl_Icon.Text = MainFrmDesign.MsgTy_WARNING;
                     break;
                 case Common.MsgTypeEnum.Trace:
-                    Lbl_Icon.Text = this.MsgTypeText.MSG_TRACE;
+                    Lbl_Icon.Text = MainFrmDesign.MsgTy_TRACE;
                     break;
             }
             Btn_OK.Visible = false;

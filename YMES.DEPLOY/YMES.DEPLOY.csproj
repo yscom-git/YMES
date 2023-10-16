@@ -52,19 +52,11 @@
     <Compile Include="CustomizedMainFrm.Designer.cs">
       <DependentUpon>CustomizedMainFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MES\TagPrt_PartCheck.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MES\TagPrt_PartCheck.Designer.cs">
-      <DependentUpon>TagPrt_PartCheck.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomizedMainFrm.resx">
       <DependentUpon>CustomizedMainFrm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MES\TagPrt_PartCheck.resx">
-      <DependentUpon>TagPrt_PartCheck.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +93,10 @@
     <ProjectReference Include="..\YMES.FX.PLC\YMES.FX.PLC.csproj">
       <Project>{265167c8-f09e-434b-9061-08b729f613e5}</Project>
       <Name>YMES.FX.PLC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YMES.Logics\YMES.Logics.csproj">
+      <Project>{e1afbac8-0509-46ef-ac4f-6e1138d0bf31}</Project>
+      <Name>YMES.Logics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

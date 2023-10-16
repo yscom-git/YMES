@@ -35,12 +35,15 @@
             // 
             this.MainFrmDesign.AppIcon = ((System.Drawing.Icon)(resources.GetObject("MainFrmDesign.AppIcon")));
             this.MainFrmDesign.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.DDMMYYYY;
+            this.MainFrmDesign.TIT_Line = "D/TRIM";
+            this.MainFrmDesign.TIT_Plant = "AP";
+            this.MainFrmDesign.TIT_Station = "Station #1";
             this.MainFrmDesign.Xml_DBSvr_NM = "SVR";
             // 
             // CustomizedMainFrm
             // 
             this.AppIcon = ((System.Drawing.Icon)(resources.GetObject("$this.AppIcon")));
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(919, 644);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

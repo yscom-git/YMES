@@ -7,19 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YMES.Logics.Base;
 
-namespace YMES.DEPLOY.MES
+namespace YMES.Logics.MES
 {
-    public partial class TagPrt_PartCheck : YMES.FX.MainForm.BaseContainer
+    public partial class TagPrint : Base.LocalizedContainer
     {
-        
-        public TagPrt_PartCheck()
+        public TagPrint()
         {
             InitializeComponent();
-        }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
         }
     }
 }

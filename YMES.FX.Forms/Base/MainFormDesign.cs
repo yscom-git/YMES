@@ -8,6 +8,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 using static YMES.FX.MainForm.Base.Common;
 
 namespace YMES.FX.MainForm.Base
@@ -21,8 +22,14 @@ namespace YMES.FX.MainForm.Base
         private Image m_LogoImg = Properties.Resources.PB_LOGO;
         private Icon m_AppIcon;
 
-        private MsgType m_MsgTypeText = new MsgType("WARNING", "NOTICE", "ERROR", "TRACE");
-        
+        private string m_XMLConfigFile = @".\Config.xml";
+        private string m_XMLDebugModeEleName = "DEBUG_MODE";
+
+        private string m_MsgTy_WARNING = "WARNING";
+        private string m_MsgTy_ALARM = "NOTICE";   
+        private string m_MsgTy_ERROR = "ERROR";
+        private string m_MsgTy_TRACE = "TRACE";
+
         
         private Common.DateFormatEnum m_TIT_DateFormat = Common.DateFormatEnum.YYYYMMDD;
         private DateTime m_CurrentTime = DateTime.Now;
@@ -61,7 +68,18 @@ namespace YMES.FX.MainForm.Base
         private string m_Xml_DBSID_NM = "DBSERVICE";
         private string m_Xml_DBPort_NM = "DBPORT";
 
-
+        [Category(CN_CATEGORY_DB)]
+        public string XMLConfigFile
+        {
+            get { return m_XMLConfigFile; }
+            set { m_XMLConfigFile = value; }
+        }
+        [Category(CN_CATEGORY_DB)]
+        public string XMLDebugModeEleName
+        {
+            get { return m_XMLDebugModeEleName; }
+            set { m_XMLDebugModeEleName = value; }
+        }
         [System.ComponentModel.Category(CN_CATEGORY_DB)]
         public string Xml_DBKind_NM
         {
@@ -121,6 +139,47 @@ namespace YMES.FX.MainForm.Base
         {
             get { return m_Exit_Dlg_Contents; }
             set { m_Exit_Dlg_Contents = value; }
+        }
+
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
+        public string MsgTy_WARNING
+        {
+            get { return m_MsgTy_WARNING; }
+            set 
+            { 
+                m_MsgTy_WARNING = value;
+                StatusMsgTitle(MsgTypeEnum.Warnning);
+            }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
+        public string MsgTy_ALARM
+        {
+            get { return m_MsgTy_ALARM; }
+            set 
+            { 
+                m_MsgTy_ALARM = value;
+                StatusMsgTitle(MsgTypeEnum.Alarm);
+            }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
+        public string MsgTy_ERROR
+        {
+            get { return m_MsgTy_ERROR; }
+            set 
+            { 
+                m_MsgTy_ERROR = value;
+                StatusMsgTitle(MsgTypeEnum.Error);
+            }
+        }
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
+        public string MsgTy_TRACE
+        {
+            get { return m_MsgTy_TRACE; }
+            set 
+            { 
+                m_MsgTy_TRACE = value;
+                StatusMsgTitle(MsgTypeEnum.Alarm);
+            }
         }
 
         [Browsable(false)]
@@ -416,12 +475,6 @@ namespace YMES.FX.MainForm.Base
             }
         }
         
-        [System.ComponentModel.Category(CN_CATEGORY_APP)]
-        public MsgType MsgTypeText
-        {
-            get { return m_MsgTypeText; }
-            set { m_MsgTypeText = value; }
-        }
         public void SyncTIT_Date(DateTime date)
         {
             m_CurrentTime = date;
@@ -452,25 +505,25 @@ namespace YMES.FX.MainForm.Base
                 switch (msgType)
                 {
                     case Common.MsgTypeEnum.Alarm:
-                        Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_ALARM;
+                        Parent.MsgTitle_CTL.Text = this.MsgTy_ALARM;
                         Parent.MsgTitle_CTL.BackColor = Color.Blue;
                         Parent.MsgTitle_CTL.ForeColor = Color.White;
                         Parent.StatusMsg.ForeColor = Color.Blue;
                         break;
                     case Common.MsgTypeEnum.Error:
-                        Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_ERROR;
+                        Parent.MsgTitle_CTL.Text = this.MsgTy_ERROR;
                         Parent.MsgTitle_CTL.BackColor = Color.Red;
                         Parent.MsgTitle_CTL.ForeColor = Color.White;
                         Parent.StatusMsg.ForeColor = Color.Red;
                         break;
                     case Common.MsgTypeEnum.Warnning:
-                        Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_WARN;
+                        Parent.MsgTitle_CTL.Text = this.MsgTy_WARNING;
                         Parent.MsgTitle_CTL.BackColor = Color.Purple;
                         Parent.MsgTitle_CTL.ForeColor = Color.White;
                         Parent.StatusMsg.ForeColor = Color.Purple;
                         break;
                     case Common.MsgTypeEnum.Trace:
-                        Parent.MsgTitle_CTL.Text = this.MsgTypeText.MSG_TRACE;
+                        Parent.MsgTitle_CTL.Text = this.MsgTy_TRACE;
                         Parent.MsgTitle_CTL.BackColor = Color.Purple;
                         Parent.MsgTitle_CTL.ForeColor = Color.White;
                         Parent.StatusMsg.ForeColor = Color.Purple;
@@ -483,6 +536,7 @@ namespace YMES.FX.MainForm.Base
         {
 
         }
+        
     }
 
     public class MainFormTitlesConverter : ExpandableObjectConverter
@@ -542,5 +596,7 @@ namespace YMES.FX.MainForm.Base
             }
             return base.ConvertFrom(context, culture, value);
         }
+
+        
     }
 }

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            YMES.FX.MainForm.Base.MsgType msgType1 = new YMES.FX.MainForm.Base.MsgType();
             this.pn_Msg = new System.Windows.Forms.Panel();
             this.StatusProgress = new System.Windows.Forms.ProgressBar();
             this.Btn_Config = new System.Windows.Forms.Button();
@@ -399,11 +398,6 @@
             this.MainFrmDesign.Exit_Dlg_Contents = "Do you want to exit program?";
             this.MainFrmDesign.Exit_Dlg_Title = "Exit of Program";
             this.MainFrmDesign.LogoImg = global::YMES.FX.MainForm.Properties.Resources.PB_LOGO;
-            msgType1.MSG_ALARM = "NOTICE";
-            msgType1.MSG_ERROR = "ERROR";
-            msgType1.MSG_TRACE = "TRACE";
-            msgType1.MSG_WARN = "WARNING";
-            this.MainFrmDesign.MsgTypeText = msgType1;
             this.MainFrmDesign.Parent = null;
             this.MainFrmDesign.TIT_Config = "Config";
             this.MainFrmDesign.TIT_Config_FONT = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);

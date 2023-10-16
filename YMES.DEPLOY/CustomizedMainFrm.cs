@@ -13,6 +13,7 @@ namespace YMES.DEPLOY
 {
     public partial class CustomizedMainFrm : BaseMainForm
     {
+        private const string CN_LOGIC_APP_NAME = "YMES.Logics";
         public CustomizedMainFrm()
         {
             InitializeComponent();
@@ -22,13 +23,16 @@ namespace YMES.DEPLOY
             
             base.OnLoad(e);
             StartBC();
+            
+            StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "TEST");
+            
         }
         private void StartBC()
         {
             string pgmClassName = "";
             if (GetXMLConfig("DEBUG_CLIENT").Contains("@"))
             {
-                pgmClassName = Application.ProductName + "." + GetXMLConfig("DEBUG_CLIENT").Substring(1);
+                pgmClassName = CN_LOGIC_APP_NAME + "." + GetXMLConfig("DEBUG_CLIENT").Substring(1) +", " + CN_LOGIC_APP_NAME;
             }
             ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
         }
