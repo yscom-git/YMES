@@ -206,12 +206,14 @@ namespace YMES.FX.MainForm
         }
         protected override void OnLoad(EventArgs e)
         {
+            string error = "";
             if (DesignMode == false)
             {
                 OpenInitialConfig();
                 if (ConnectDB() == false)
                 {
-                    StatusBarMsg(Common.MsgTypeEnum.Error, MainCtl.Error_DB_Connection, System.Reflection.MethodBase.GetCurrentMethod().Name, true);
+                    error = MainCtl.Error_DB_Connection;
+                    
                 }
                 CheckDuplicatedRun(MainCtl.AllowDuplicatedRun);
                 InitDesign();
@@ -219,6 +221,15 @@ namespace YMES.FX.MainForm
                 TmrTimeBase.Start();
                 
                 StartBC();
+
+                if(string.IsNullOrEmpty(error))
+                {
+                    StatusBarMsg(Common.MsgTypeEnum.Alarm, ChildBC.Name);
+                }
+                else
+                {
+                    StatusBarMsg(Common.MsgTypeEnum.Error, error, System.Reflection.MethodBase.GetCurrentMethod().Name, true);
+                }
             }
 
             base.OnLoad(e);
