@@ -98,6 +98,7 @@ namespace YMES.FX.DB.WCF
         {
             return ConnectTest(m_IP, Convert.ToInt32(m_Port), m_timeOutMilsec);
         }
+        
         private bool ConnectTest(string ip, int port, int millisecondsTimeout)
         {
             bool result = false;
@@ -105,7 +106,8 @@ namespace YMES.FX.DB.WCF
 
             try
             {
-                ip = System.Net.Dns.GetHostEntry(ip).AddressList[0].ToString();
+
+                ip = Base.Util.GetRealIP(ip);
                 socket = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
                 socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, System.Net.Sockets.SocketOptionName.DontLinger, false);
                 IAsyncResult ret = socket.BeginConnect((new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ip), port)), null, null);

@@ -33,12 +33,11 @@
             // 
             // MainFrmDesign
             // 
-            this.MainFrmDesign.AppIcon = ((System.Drawing.Icon)(resources.GetObject("MainFrmDesign.AppIcon")));
-            this.MainFrmDesign.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.DDMMYYYY;
-            this.MainFrmDesign.TIT_Line = "D/TRIM";
-            this.MainFrmDesign.TIT_Plant = "AP";
-            this.MainFrmDesign.TIT_Station = "Station #1";
-            this.MainFrmDesign.Xml_DBSvr_NM = "SVR";
+            this.MainCtl.AppIcon = ((System.Drawing.Icon)(resources.GetObject("MainFrmDesign.AppIcon")));
+            this.MainCtl.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.DDMMYYYY;
+            this.MainCtl.TIT_Line = "D/TRIM";
+            this.MainCtl.TIT_Plant = "AP";
+            this.MainCtl.TIT_Station = "Station #1";
             // 
             // CustomizedMainFrm
             // 

@@ -19,26 +19,22 @@ namespace YMES.FX.MainForm
 {
     public partial class BaseMainForm : Form, IMainFormDesign
     {
+        private const int CN_TIMER_CNT = 2;
+        private DateTime[] m_TimerDate;
         private YMES.FX.DB.CommonHelper m_DBHelper = null;
         
-        private const string CN_CATEGORY = "_YMES";
         
         private Point m_MouseMovePoint = new Point();
         private bool m_bMoveMouse = false;
 
         public delegate void BeepBar(object sender, bool bBeep);
         public event BeepBar OnBeepBar = null;
-        private bool m_AllowDuplicatedRun = false;
+        
         private BaseContainer m_ChildBC = null;
         private DataTable m_XMLConfigDT = null;
         
         
-        [Category(CN_CATEGORY)]
-        public bool AllowDuplicatedRun
-        {
-            get { return m_AllowDuplicatedRun; }
-            set { m_AllowDuplicatedRun = value; }
-        }
+        
         
         [Browsable(false)]
         public YMES.FX.DB.CommonHelper DBHelper
@@ -176,7 +172,7 @@ namespace YMES.FX.MainForm
         {
             get
             {
-                string val = GetXMLConfig(MainFrmDesign.XMLDebugModeEleName);
+                string val = GetXMLConfig(MainCtl.XMLDebugModeEleName);
                 bool bret = false;
                 switch(val.ToUpper().Trim())
                 {
@@ -190,7 +186,24 @@ namespace YMES.FX.MainForm
                 return bret;
             }
         }
-
+        protected virtual void StartBC()
+        {
+            string pgmClassName = "";
+            if (GetXMLConfig(MainCtl.XMLDebugClientEleName).Contains("@"))
+            {
+                pgmClassName = MainCtl.LogicAppNameSpace + "." + GetXMLConfig(MainCtl.XMLDebugClientEleName).Substring(1) + ", " + MainCtl.LogicAppNameSpace;
+                ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
+            }
+            
+        }
+        private void InitTimeTimes(int timerCnt)
+        {
+            m_TimerDate = new DateTime[timerCnt];
+            for(int i=0;i<timerCnt;i++)
+            {
+                m_TimerDate[i] = DateTime.Now;
+            }
+        }
         protected override void OnLoad(EventArgs e)
         {
             if (DesignMode == false)
@@ -198,12 +211,14 @@ namespace YMES.FX.MainForm
                 OpenInitialConfig();
                 if (ConnectDB() == false)
                 {
-                    StatusBarMsg(Common.MsgTypeEnum.Error, MainFrmDesign.Error_DB_Connection, System.Reflection.MethodBase.GetCurrentMethod().Name, true);
+                    StatusBarMsg(Common.MsgTypeEnum.Error, MainCtl.Error_DB_Connection, System.Reflection.MethodBase.GetCurrentMethod().Name, true);
                 }
-                CheckDuplicatedRun(AllowDuplicatedRun);
+                CheckDuplicatedRun(MainCtl.AllowDuplicatedRun);
                 InitDesign();
+                InitTimeTimes(CN_TIMER_CNT);
                 TmrTimeBase.Start();
                 
+                StartBC();
             }
 
             base.OnLoad(e);
@@ -228,10 +243,10 @@ namespace YMES.FX.MainForm
         {
             try
             {
-                string strDBType = GetXMLConfig("DB_CONNECTION").ToUpper();
+                string strDBType = GetXMLConfig(MainCtl.Xml_DBKind_NM).ToUpper();
                 if (string.IsNullOrEmpty(strDBType))
                 {
-                    throw new Exception("Config file error:" + MainFrmDesign.XMLConfigFile);
+                    throw new Exception("Config file error:" + MainCtl.XMLConfigFile);
                 }
                 switch (strDBType)
                 {
@@ -252,14 +267,14 @@ namespace YMES.FX.MainForm
                 }
                 m_DBHelper.SetXMLName
                     (
-                        MainFrmDesign.Xml_DBKind_NM
-                        , MainFrmDesign.Xml_DBSvr_NM
-                        , MainFrmDesign.Xml_DBID_NM
-                        , MainFrmDesign.Xml_DBPWD_NM
-                        , MainFrmDesign.Xml_DBSID_NM
-                        , MainFrmDesign.Xml_DBPort_NM
+                        MainCtl.Xml_DBKind_NM
+                        , MainCtl.Xml_DBSvr_NM
+                        , MainCtl.Xml_DBID_NM
+                        , MainCtl.Xml_DBPWD_NM
+                        , MainCtl.Xml_DBSID_NM
+                        , MainCtl.Xml_DBPort_NM
                     );
-                return m_DBHelper.Open(MainFrmDesign.XMLConfigFile);
+                return m_DBHelper.Open(MainCtl.XMLConfigFile);
             }
             catch (Exception eLog)
             {
@@ -271,9 +286,9 @@ namespace YMES.FX.MainForm
         {
             try
             {
-                if (File.Exists(MainFrmDesign.XMLConfigFile))
+                if (File.Exists(MainCtl.XMLConfigFile))
                 {
-                    m_XMLConfigDT = Base.Common.GetXml2DT(MainFrmDesign.XMLConfigFile);
+                    m_XMLConfigDT = Base.Common.GetXml2DT(MainCtl.XMLConfigFile);
                 }
                 else
                 {
@@ -293,7 +308,7 @@ namespace YMES.FX.MainForm
                 System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out isNew);
                 if (isNew == false)
                 {    // Duplicated Run
-                    FrmMsgBox(Common.MsgTypeEnum.Error, MainFrmDesign.DuplicatedRunMsg, MainFrmDesign.DuplicatedRunTitle, MsgBox.MsgBtnEnum.OK, true, true);
+                    FrmMsgBox(Common.MsgTypeEnum.Error, MainCtl.DuplicatedRunMsg, MainCtl.DuplicatedRunTitle, MsgBox.MsgBtnEnum.OK, true, true);
                     Application.Exit();
                     return;
                 }
@@ -321,7 +336,7 @@ namespace YMES.FX.MainForm
 
         protected virtual void OnCloseBtn(object sender, EventArgs e)
         {
-            if (FrmMsgBox(Common.MsgTypeEnum.Warnning, MainFrmDesign.Exit_Dlg_Contents, MainFrmDesign.Exit_Dlg_Title, MsgBox.MsgBtnEnum.YesNo) == DialogResult.Yes)
+            if (FrmMsgBox(Common.MsgTypeEnum.Warnning, MainCtl.Exit_Dlg_Contents, MainCtl.Exit_Dlg_Title, MsgBox.MsgBtnEnum.YesNo) == DialogResult.Yes)
             {
                 Close();
             }
@@ -402,7 +417,7 @@ namespace YMES.FX.MainForm
             this.Invoke(new MethodInvoker(
             delegate ()
             {
-                MainFrmDesign.StatusMsgTitle(msgType);
+                MainCtl.StatusMsgTitle(msgType);
 
                 if (msgType != Common.MsgTypeEnum.Trace)
                 {
@@ -429,7 +444,7 @@ namespace YMES.FX.MainForm
                 }
 
 
-                MsgBox msg = new MsgBox(this.MainFrmDesign);
+                MsgBox msg = new MsgBox(this.MainCtl);
 
                 msg.Name = "BaseMainForm_MSG";
                 bool modal = bModal;
@@ -496,7 +511,25 @@ namespace YMES.FX.MainForm
 
         private void TmrTimeBase_Tick(object sender, EventArgs e)
         {
-            MainFrmDesign.SyncTIT_Date(DateTime.Now);
+            if ((DateTime.Now - m_TimerDate[0]).TotalMilliseconds >= 100)
+            {
+                MainCtl.SyncTIT_Date(DateTime.Now);
+                m_TimerDate[0] = DateTime.Now;
+            }
+            if((DateTime.Now - m_TimerDate[1]).TotalSeconds >=2)
+            {
+                if(DBHelper.IsOpen())
+                {
+                    lbl_Time.BackColor = Color.Black;
+                }
+                else
+                {
+                    lbl_Time.BackColor = Color.Red;
+                }
+                m_TimerDate[1] = DateTime.Now;
+            }
+
+
         }
 
         #region <<DBHelper

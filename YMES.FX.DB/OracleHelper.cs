@@ -517,11 +517,37 @@ namespace YMES.FX.DB
             }
             return ExecuteNonQuery(query, dicRet);
         }
+        
+        private bool ConnectTest(string ip, int port, int millisecondsTimeout)
+        {
+            bool result = false;
+            System.Net.Sockets.Socket socket = null;
 
+            try
+            {
+                ip = Base.Util.GetRealIP(ip);
+                socket = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork, System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Tcp);
+                socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel.Socket, System.Net.Sockets.SocketOptionName.DontLinger, false);
+                IAsyncResult ret = socket.BeginConnect((new System.Net.IPEndPoint(System.Net.IPAddress.Parse(ip), port)), null, null);
 
+                result = ret.AsyncWaitHandle.WaitOne(millisecondsTimeout, false);
+            }
+            catch (Exception eLog)
+            {
+                System.Diagnostics.Debug.WriteLine(eLog.Message);
+            }
+            finally
+            {
+                if (socket != null)
+                {
+                    socket.Close();
+                }
+            }
+            return result;
+        }
         public bool IsOpen()
         {
-            if (m_Conn.State == ConnectionState.Closed)
+            if (ConnectTest(m_DBConnInfor.SVR, Convert.ToInt32(m_DBConnInfor.PORT), 500) == false)
             {
                 return false;
             }

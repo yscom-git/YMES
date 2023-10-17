@@ -8,6 +8,14 @@ namespace YMES.FX.DB.Base
 {
     public class Util
     {
+        public static string GetRealIP(string httpAddress)
+        {
+            string ip = httpAddress.ToLower().Replace("http://", "").Replace("https://", "");
+            ip = ip.Split(':')[0];
+            ip = ip.Split('/')[0];
+            ip = System.Net.Dns.GetHostEntry(ip).AddressList[0].ToString();
+            return ip;
+        }
         public static bool WriteTxtLog(string log, string writeDIR = ".\\DB_LOG")
         {
             bool bRet = true;

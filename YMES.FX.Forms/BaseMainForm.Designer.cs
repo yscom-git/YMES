@@ -53,7 +53,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Pan_Body = new System.Windows.Forms.Panel();
             this.TmrTimeBase = new System.Windows.Forms.Timer(this.components);
-            this.MainFrmDesign = new YMES.FX.MainForm.Base.MainFormDesign();
+            this.MainCtl = new YMES.FX.MainForm.Base.MainFormDesign();
             this.pn_Msg.SuspendLayout();
             this.pn_Main.SuspendLayout();
             this.Pan_Title.SuspendLayout();
@@ -388,32 +388,47 @@
             this.TmrTimeBase.Interval = 500;
             this.TmrTimeBase.Tick += new System.EventHandler(this.TmrTimeBase_Tick);
             // 
-            // MainFrmDesign
+            // MainCtl
             // 
-            this.MainFrmDesign.AppIcon = null;
-            this.MainFrmDesign.ContainerControl = this;
-            
-            this.MainFrmDesign.DuplicatedRunMsg = "Duplicated Application";
-            this.MainFrmDesign.DuplicatedRunTitle = "Violated Run";
-            this.MainFrmDesign.Exit_Dlg_Contents = "Do you want to exit program?";
-            this.MainFrmDesign.Exit_Dlg_Title = "Exit of Program";
-            this.MainFrmDesign.LogoImg = global::YMES.FX.MainForm.Properties.Resources.PB_LOGO;
-            this.MainFrmDesign.Parent = null;
-            this.MainFrmDesign.TIT_Config = "Config";
-            this.MainFrmDesign.TIT_Config_FONT = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.YYYYMMDD;
-            this.MainFrmDesign.TIT_Exit = "EXIT";
-            this.MainFrmDesign.TIT_Exit_FONT = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_Line = "This is Production Line";
-            this.MainFrmDesign.TIT_Line_FONT = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_Plant = "PLANT";
-            this.MainFrmDesign.TIT_Plant_FONT = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_Result = "Result";
-            this.MainFrmDesign.TIT_Result_FONT = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_Station = "This is WorkStation";
-            this.MainFrmDesign.TIT_Station_FONT = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.MainFrmDesign.TIT_WorkStandard = "WORK\r\nSTANDARD";
-            this.MainFrmDesign.TIT_WorkStandard_FONT = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.AllowDuplicatedRun = false;
+            this.MainCtl.AppIcon = null;
+            this.MainCtl.ContainerControl = this;
+            this.MainCtl.DuplicatedRunMsg = "Duplicated Application";
+            this.MainCtl.DuplicatedRunTitle = "Violated Run";
+            this.MainCtl.Error_DB_Connection = "DB Connection Error";
+            this.MainCtl.Exit_Dlg_Contents = "Do you want to exit program?";
+            this.MainCtl.Exit_Dlg_Title = "Exit of Program";
+            this.MainCtl.LogicAppNameSpace = "YMES.Logics";
+            this.MainCtl.LogoImg = global::YMES.FX.MainForm.Properties.Resources.PB_LOGO;
+            this.MainCtl.MsgTy_ALARM = "NOTICE";
+            this.MainCtl.MsgTy_ERROR = "ERROR";
+            this.MainCtl.MsgTy_TRACE = "TRACE";
+            this.MainCtl.MsgTy_WARNING = "WARNING";
+            this.MainCtl.Parent = null;
+            this.MainCtl.TIT_Config = "Config";
+            this.MainCtl.TIT_Config_FONT = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_DateFormat = YMES.FX.MainForm.Base.Common.DateFormatEnum.YYYYMMDD;
+            this.MainCtl.TIT_Exit = "EXIT";
+            this.MainCtl.TIT_Exit_FONT = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_Line = "This is Production Line";
+            this.MainCtl.TIT_Line_FONT = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_Plant = "PLANT";
+            this.MainCtl.TIT_Plant_FONT = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_Result = "Result";
+            this.MainCtl.TIT_Result_FONT = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_Station = "This is WorkStation";
+            this.MainCtl.TIT_Station_FONT = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.TIT_WorkStandard = "WORK\r\nSTANDARD";
+            this.MainCtl.TIT_WorkStandard_FONT = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.MainCtl.Xml_DBID_NM = "DBUID";
+            this.MainCtl.Xml_DBKind_NM = "DB_CONNECTION";
+            this.MainCtl.Xml_DBPort_NM = "DBPORT";
+            this.MainCtl.Xml_DBPWD_NM = "DBPWD";
+            this.MainCtl.Xml_DBSID_NM = "DBSERVICE";
+            this.MainCtl.Xml_DBSvr_NM = "DBSVR";
+            this.MainCtl.XMLConfigFile = ".\\Config.xml";
+            this.MainCtl.XMLDebugClientEleName = "DEBUG_CLIENT";
+            this.MainCtl.XMLDebugModeEleName = "DEBUG_MODE";
             // 
             // BaseMainForm
             // 
@@ -459,6 +474,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel Pan_Body;
         private System.Windows.Forms.Timer TmrTimeBase;
-        public Base.MainFormDesign MainFrmDesign;
+        public Base.MainFormDesign MainCtl;
     }
 }

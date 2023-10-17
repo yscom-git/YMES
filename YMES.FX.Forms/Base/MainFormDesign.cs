@@ -18,19 +18,23 @@ namespace YMES.FX.MainForm.Base
     public class MainFormDesign : MainFormComponent
     {
         private const string CN_CATEGORY_APP = "_YMES.Appearance";
+        private const string CN_CATEGORY_MOV = "_YMES.Movement";
         private const string CN_CATEGORY_DB = "_YMES.DataBase";
         private Image m_LogoImg = Properties.Resources.PB_LOGO;
         private Icon m_AppIcon;
 
-        private string m_XMLConfigFile = @".\Config.xml";
-        private string m_XMLDebugModeEleName = "DEBUG_MODE";
+        
 
         private string m_MsgTy_WARNING = "WARNING";
         private string m_MsgTy_ALARM = "NOTICE";   
         private string m_MsgTy_ERROR = "ERROR";
         private string m_MsgTy_TRACE = "TRACE";
-
         
+        private string m_XMLConfigFile = @".\Config.xml";
+        private string m_XMLDebugModeEleName = "DEBUG_MODE";
+        private string m_XMLDebugClientEleName = "DEBUG_CLIENT";
+        private string m_LogicAppNameSpace = "YMES.Logics";
+
         private Common.DateFormatEnum m_TIT_DateFormat = Common.DateFormatEnum.YYYYMMDD;
         private DateTime m_CurrentTime = DateTime.Now;
         private IMainFormDesign m_Parent;
@@ -54,7 +58,7 @@ namespace YMES.FX.MainForm.Base
 
         private string m_TIT_Config;
         private Font m_TIT_Config_FONT;
-
+        private bool m_AllowDuplicatedRun = false;
         private string m_DuplicatedRunMsg = "Duplicated Application";
         private string m_DuplicatedRunTitle = "Violated Run";
         private string m_Exit_Dlg_Title= "Exit of Program";
@@ -67,7 +71,30 @@ namespace YMES.FX.MainForm.Base
         private string m_Xml_DBPWD_NM = "DBPWD";
         private string m_Xml_DBSID_NM = "DBSERVICE";
         private string m_Xml_DBPort_NM = "DBPORT";
-
+        [Category(CN_CATEGORY_MOV)]
+        public string LogicAppNameSpace
+        {
+            get { return m_LogicAppNameSpace; }
+            set { m_LogicAppNameSpace = value; }
+        }
+        [Category(CN_CATEGORY_MOV)]
+        public string XMLDebugModeEleName
+        {
+            get { return m_XMLDebugModeEleName; }
+            set { m_XMLDebugModeEleName = value; }
+        }
+        [Category(CN_CATEGORY_MOV)]
+        public string XMLDebugClientEleName
+        {
+            get { return m_XMLDebugClientEleName; }
+            set { m_XMLDebugClientEleName = value; }
+        }
+        [Category(CN_CATEGORY_MOV)]
+        public string XMLConfigFile
+        {
+            get { return m_XMLConfigFile; }
+            set { m_XMLConfigFile = value; }
+        }
         [Category(CN_CATEGORY_DB)]
         public string Error_DB_Connection
         {
@@ -75,18 +102,7 @@ namespace YMES.FX.MainForm.Base
             set { m_Error_DB_Connection = value; }
         }
 
-        [Category(CN_CATEGORY_DB)]
-        public string XMLConfigFile
-        {
-            get { return m_XMLConfigFile; }
-            set { m_XMLConfigFile = value; }
-        }
-        [Category(CN_CATEGORY_DB)]
-        public string XMLDebugModeEleName
-        {
-            get { return m_XMLDebugModeEleName; }
-            set { m_XMLDebugModeEleName = value; }
-        }
+       
         [System.ComponentModel.Category(CN_CATEGORY_DB)]
         public string Xml_DBKind_NM
         {
@@ -123,6 +139,13 @@ namespace YMES.FX.MainForm.Base
             get { return m_Xml_DBPort_NM; }
             set { m_Xml_DBPort_NM = value; }
         }
+        [System.ComponentModel.Category(CN_CATEGORY_APP)]
+        public bool AllowDuplicatedRun
+        {
+            get { return m_AllowDuplicatedRun; }
+            set { m_AllowDuplicatedRun = value; }
+        }
+
         [System.ComponentModel.Category(CN_CATEGORY_APP)]
         public string Exit_Dlg_Title
         {

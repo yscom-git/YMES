@@ -4,8 +4,8 @@
 	<CORCD>5200</CORCD><!--Corporation Code-->
 	<BIZCD>5210</BIZCD><!--Business Code-->
 	
-	<DB_CONNECTION>WCF</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->	
-	<SVR>http://wcf.yscom.co.kr:1818/wcf</SVR><!--DB Server IP-->
+	<DB_CONNECTION>WCF</DB_CONNECTION><!--DB Type : ORACLE, MSSQL, WCF, ACCESS-->
+	<DBSVR>http://wcf.yscom.co.kr:1818/wcf</DBSVR><!--DB Server IP : http://wcf.yscom.co.kr:1818/wcf-->
 	<DBUID></DBUID><!--DB User ID-->
 	<DBPWD></DBPWD><!--DB User Password-->
 	<DBSERVICE></DBSERVICE><!--DB Service(Oracle)-->	
