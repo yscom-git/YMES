@@ -4,4 +4,4 @@ This Project concept is simple.
   
 If you want to contact me, send me a mail to yscom.co.kr@gmail.com.
 
-Testing DB WCF address : http://wcf.yscom.co.kr:1818/wcf
+Testing DB WCF address : http://wcf.yscom.co.kr:1818/Service.svc
