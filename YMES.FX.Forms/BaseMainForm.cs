@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using YMES.FX.DB;
 using YMES.FX.MainForm.Base;
+using static YMES.FX.MainForm.BaseContainer;
 
 namespace YMES.FX.MainForm
 {
@@ -248,7 +249,38 @@ namespace YMES.FX.MainForm
             }
 
             base.OnLoad(e);
+            Control[] ctls = GetAllControls(this);
+            if(ctls.Length > 0 )
+            {
+                foreach(Control ctl in ctls)
+                {
+                    if(ctl is BaseContainer)
+                    {
+                        ((BaseContainer)ctl).AfterBaseFormLoad(e);
+                    }
+                }
+            }
+        }
+        protected Control[] GetAllControls(Control containerControl)
+        {
+            List<Control> allControls = new List<Control>();
 
+            Queue<Control.ControlCollection> queue = new Queue<Control.ControlCollection>();
+            queue.Enqueue(containerControl.Controls);
+
+            while (queue.Count > 0)
+            {
+                Control.ControlCollection controls
+                            = (Control.ControlCollection)queue.Dequeue();
+                if (controls == null || controls.Count == 0) continue;
+
+                foreach (Control control in controls)
+                {
+                    allControls.Add(control);
+                    queue.Enqueue(control.Controls);
+                }
+            }
+            return allControls.ToArray();
         }
         protected virtual void InitDesign()
         {

@@ -17,15 +17,17 @@ namespace YMES.Logics.MES
         {
             InitializeComponent();
         }
-        protected override void OnLoad(EventArgs e)
+       
+        public override void AfterBaseFormLoad(EventArgs e)
         {
-            base.OnLoad(e);
-
-            DataTable dt = ExcuteQuery("SELECT sysdate DAT FROM DUAL", null) ;
-            if(dt.Rows.Count>0)
-            {        
-
+            base.AfterBaseFormLoad(e);
+            DataTable dt = ExcuteQuery("SELECT sysdate DAT FROM DUAL", null);
+            if (dt.Rows.Count > 0)
+            {
+                this.PBaseFrm.StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "Data Count : " + dt.Rows.Count.ToString());
             }
         }
+
+
     }
 }

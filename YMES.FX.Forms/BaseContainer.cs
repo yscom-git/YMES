@@ -12,6 +12,16 @@ namespace YMES.FX.MainForm
 {
     public partial class BaseContainer : UserControl
     {
+        public delegate void BaseFormLoad(object sender, EventArgs e);
+        public event BaseFormLoad OnAfterBaseFormLoad = null;
+
+        public virtual void AfterBaseFormLoad(EventArgs e)
+        {
+            if(OnAfterBaseFormLoad!= null)
+            {
+                OnAfterBaseFormLoad(this, e);
+            }
+        }
         protected FX.DB.CommonHelper DBHelper
         {
             get
@@ -24,6 +34,21 @@ namespace YMES.FX.MainForm
                     }
                 }
                 return null;
+            }
+        }
+        protected FX.MainForm.BaseMainForm PBaseFrm
+        {
+            get
+            {
+                if (this.ParentForm != null)
+                {
+                    if (ParentForm is BaseMainForm)
+                    {
+                        return (FX.MainForm.BaseMainForm)ParentForm;
+                    }
+                }
+                return null;
+
             }
         }
         public BaseContainer()
