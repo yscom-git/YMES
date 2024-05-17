@@ -24,7 +24,7 @@ namespace YMES.Logics.MES
             DataTable dt = ExcuteQuery("SELECT sysdate DAT FROM DUAL", null);
             if (dt.Rows.Count > 0)
             {
-                this.PBaseFrm.StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "Data Count : " + dt.Rows.Count.ToString());
+                StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "Data Count : " + dt.Rows.Count.ToString());
             }
         }
 

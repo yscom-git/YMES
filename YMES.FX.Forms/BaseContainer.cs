@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using YMES.FX.MainForm.Base;
 
 namespace YMES.FX.MainForm
 {
@@ -55,7 +56,20 @@ namespace YMES.FX.MainForm
         {
             InitializeComponent();
         }
-
+        #region <<BaseFrom Control
+        /// <summary>
+        /// Write Message in StatusBar
+        /// </summary>
+        /// <param name="msgType">Type of Message</param>
+        /// <param name="msg">Message</param>
+        /// <param name="callMethodName">Called Method Name</param>
+        /// <param name="beep">use the Alram Horn</param>
+        /// <param name="logWrite">Trace the Log data</param>
+        public void StatusBarMsg(Common.MsgTypeEnum msgType, string msg, string callMethodName = "", bool beep = false, bool logWrite = true)
+        {
+            PBaseFrm.StatusBarMsg(msgType, msg, callMethodName, beep, logWrite);
+        }
+        #endregion
         #region <<DBHelper
         public DataTable ExcuteQuery(string query, Dictionary<string, string> param)
         {
