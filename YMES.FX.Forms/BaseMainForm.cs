@@ -186,15 +186,30 @@ namespace YMES.FX.MainForm
                 return bret;
             }
         }
+        private void StartBC(out string error)
+        {
+
+            error = "";
+            try
+            {
+                string pgmClassName = "";
+                if (GetXMLConfig(MainCtl.XMLDebugClientEleName).Contains("@"))
+                {
+                    pgmClassName = MainCtl.LogicAppNameSpace + "." + GetXMLConfig(MainCtl.XMLDebugClientEleName).Substring(1) + ", " + MainCtl.LogicAppNameSpace;
+                    ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
+                }
+            }
+            catch (Exception eLog)
+            {
+                error = eLog.ToString();
+
+            }
+
+        }
         protected virtual void StartBC()
         {
-            string pgmClassName = "";
-            if (GetXMLConfig(MainCtl.XMLDebugClientEleName).Contains("@"))
-            {
-                pgmClassName = MainCtl.LogicAppNameSpace + "." + GetXMLConfig(MainCtl.XMLDebugClientEleName).Substring(1) + ", " + MainCtl.LogicAppNameSpace;
-                ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
-            }
-            
+            string error = "";
+            StartBC(out error);
         }
         private void InitTimeTimes(int timerCnt)
         {
@@ -220,7 +235,7 @@ namespace YMES.FX.MainForm
                 InitTimeTimes(CN_TIMER_CNT);
                 TmrTimeBase.Start();
                 
-                StartBC();
+                StartBC(out error);
 
                 if(string.IsNullOrEmpty(error))
                 {

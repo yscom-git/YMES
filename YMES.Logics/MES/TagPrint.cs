@@ -17,5 +17,15 @@ namespace YMES.Logics.MES
         {
             InitializeComponent();
         }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            DataTable dt = ExcuteQuery("SELECT sysdate DAT FROM DUAL", null) ;
+            if(dt.Rows.Count>0)
+            {        
+
+            }
+        }
     }
 }
