@@ -69,6 +69,10 @@ namespace YMES.FX.MainForm
         {
             PBaseFrm.StatusBarMsg(msgType, msg, callMethodName, beep, logWrite);
         }
+        public DialogResult FrmMsgBox(Common.MsgTypeEnum msgType, string contents, string title, MsgBox.MsgBtnEnum btnty = MsgBox.MsgBtnEnum.OK, bool beep = false, bool bModal = false)
+        {
+            return PBaseFrm.FrmMsgBox(msgType, contents, title, btnty, beep, bModal);
+        }
         #endregion
         #region <<DBHelper
         public DataTable ExcuteQuery(string query, Dictionary<string, string> param)

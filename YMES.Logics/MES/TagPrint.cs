@@ -26,6 +26,7 @@ namespace YMES.Logics.MES
             {
                 StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "Data Count : " + dt.Rows.Count.ToString());
             }
+            FrmMsgBox(FX.MainForm.Base.Common.MsgTypeEnum.Error, "Do you want to know?", "Test");
         }
 
 
