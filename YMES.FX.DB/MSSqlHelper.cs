@@ -15,7 +15,6 @@ namespace YMES.FX.DB
         public event BackgroundRCV OnBackgroundRCV = null;
 
         public event BackgroundPR OnBackgroundPR = null;
-        private DBOpenEnum m_DBOpenTY = DBOpenEnum.XML;
  
 
 

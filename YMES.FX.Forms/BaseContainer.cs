@@ -11,6 +11,7 @@ using YMES.FX.MainForm.Base;
 
 namespace YMES.FX.MainForm
 {
+    [ToolboxItem(false)]
     public partial class BaseContainer : UserControl
     {
         public delegate void BaseFormLoad(object sender, EventArgs e);

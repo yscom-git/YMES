@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace YMES.FX.MainForm.Base
 {
+    [Browsable(false)]
     public partial class MsgBox : Form
     {
         public delegate void Confirm(object sender, DialogResult result);

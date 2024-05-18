@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace YMES.Logics.Base
 {
+    [ToolboxItem(false)]
     public partial class LocalizedContainer : FX.MainForm.BaseContainer
     {
         public LocalizedContainer()

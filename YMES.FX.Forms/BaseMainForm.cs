@@ -18,6 +18,7 @@ using static YMES.FX.MainForm.BaseContainer;
 
 namespace YMES.FX.MainForm
 {
+    [ToolboxItem(false)]
     public partial class BaseMainForm : Form, IMainFormDesign
     {
         private const int CN_TIMER_CNT = 2;

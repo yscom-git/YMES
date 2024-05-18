@@ -17,7 +17,11 @@ namespace YMES.Logics.MES
         {
             InitializeComponent();
         }
-       
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
         public override void AfterBaseFormLoad(EventArgs e)
         {
             base.AfterBaseFormLoad(e);
