@@ -29,8 +29,9 @@ namespace YMES.Logics.MES
             if (dt.Rows.Count > 0)
             {
                 StatusBarMsg(FX.MainForm.Base.Common.MsgTypeEnum.Alarm, "Data Count : " + dt.Rows.Count.ToString());
+
+                yDataGridView1.SetValue(dt);
             }
-            FrmMsgBox(FX.MainForm.Base.Common.MsgTypeEnum.Error, "Do you want to know?", "Test");
         }
 
 

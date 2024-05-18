@@ -58,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YMES.FX.Controls\YMES.FX.Controls.csproj">
+      <Project>{EEB8537A-5930-4F60-8984-34E2F08A5BCC}</Project>
+      <Name>YMES.FX.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YMES.FX.Forms\YMES.FX.MainForm.csproj">
       <Project>{b9ad1929-d4cf-4253-8dad-1b8df38a36fd}</Project>
       <Name>YMES.FX.MainForm</Name>

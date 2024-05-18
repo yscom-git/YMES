@@ -10,19 +10,52 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Xml.Linq;
 using YMES.FX.Controls.Base;
+using System.Runtime.CompilerServices;
 
 namespace YMES.FX.Controls
 {
     [ToolboxBitmap(typeof(DataGridView))]
     public partial class YDataGridView: DataGridView, Base.IYGrid
     {
+        private DataGridViewContentAlignment m_HeaderAlignment = DataGridViewContentAlignment.MiddleCenter;
+        private GridModeEnum m_GridMode = GridModeEnum.QueryNomal;
+        private bool m_FixedSort = true;
         public enum GridModeEnum
         {
             QueryNomal
             , UserSetting
         }
-        private GridModeEnum m_GridMode = GridModeEnum.QueryNomal;
+        [Category(Common.CN_CATEGORY_APP)]
+        public bool FixedSort
+        {
+            get { return m_FixedSort; }
+            set
+            {
+                m_FixedSort = value;
 
+                foreach (DataGridViewColumn col in this.Columns)
+                {
+                    if (m_FixedSort)
+                    {
+                        col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
+                    else
+                    {
+                        col.SortMode = DataGridViewColumnSortMode.Automatic;
+                    }
+                }
+            }
+        }
+        [Category(Common.CN_CATEGORY_APP)]
+        public DataGridViewContentAlignment HeaderAlignment
+        {
+            get { return m_HeaderAlignment; }
+            set 
+            { 
+                m_HeaderAlignment = value;
+                AlignHeader();
+            }
+        }
         [Category(Common.CN_CATEGORY_APP)]
         public GridModeEnum GridMode
         {
@@ -31,8 +64,58 @@ namespace YMES.FX.Controls
         }
         public YDataGridView()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
+        private void AlignHeader()
+        {
+            foreach(DataGridViewColumn col in this.Columns)
+            {
+                col.HeaderCell.Style.Alignment = HeaderAlignment;
+            }
+        }
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            this.AutoGenerateColumns = false;
+            foreach (DataGridViewColumn col in this.Columns)
+            {
+                if (m_FixedSort)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                else
+                {
+                    col.SortMode = DataGridViewColumnSortMode.Automatic;
+                }
+            }
+            if (GridMode == GridModeEnum.QueryNomal)
+            {
+
+                this.MultiSelect = false;
+                this.RowHeadersVisible = false;
+                this.ReadOnly = true;
+                this.MultiSelect = false;
+                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                this.AllowUserToAddRows = false;
+                this.AllowUserToOrderColumns = false;
+                this.AllowUserToResizeColumns = false;
+                this.AllowUserToResizeRows = false;
+                this.AllowUserToOrderColumns = false;
+                this.RowTemplate.Height = 40;
+                this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+                this.ColumnHeadersHeight = 30;
+                this.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+                this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+        }
+        protected override void OnDataBindingComplete(DataGridViewBindingCompleteEventArgs e)
+        {
+            base.OnDataBindingComplete(e);
+            AlignHeader();
+            ClearSelection();
+        }
+
+        #region Interface Define
 
         public void ClearValue()
         {
@@ -116,6 +199,10 @@ namespace YMES.FX.Controls
         }
         public void SetValue(object val, string colName = "Value")
         {
+            if(Columns.Count <=0)
+            {
+                AutoGenerateColumns = true;
+            }
             if (val is DataTable)
             {
                 this.DataSource = val;
@@ -149,5 +236,7 @@ namespace YMES.FX.Controls
                 this.DataSource = dt;
             }
         }
+        #endregion
+
     }
 }
