@@ -1,6 +1,6 @@
-﻿namespace YMES.Logics.Base
+﻿namespace YMES.FX.Controls
 {
-    partial class LocalizedContainer
+    partial class YTableLayout
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,18 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // LocalizedContainer
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.Name = "LocalizedContainer";
-            this.Size = new System.Drawing.Size(1457, 1198);
-            this.ResumeLayout(false);
-
+            components = new System.ComponentModel.Container();
         }
 
         #endregion

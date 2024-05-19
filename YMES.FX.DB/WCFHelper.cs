@@ -20,7 +20,6 @@ namespace YMES.FX.DB
         public event BackgroundPR OnBackgroundPR = null;
         private WCF.Client m_WCF = null;
         private int m_resTime = 2000;
-        private DBOpenEnum m_DBOpenTY = DBOpenEnum.XML;
         private bool m_bOpen = false;
         public int ResponseTime
         {

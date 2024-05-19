@@ -17,6 +17,7 @@ namespace YMES.FX.Controls
     [ToolboxBitmap(typeof(DataGridView))]
     public partial class YDataGridView: DataGridView, Base.IYGrid
     {
+        private string m_Key = string.Empty;
         private DataGridViewContentAlignment m_HeaderAlignment = DataGridViewContentAlignment.MiddleCenter;
         private GridModeEnum m_GridMode = GridModeEnum.QueryNomal;
         private bool m_FixedSort = true;
@@ -26,24 +27,19 @@ namespace YMES.FX.Controls
             , UserSetting
         }
         [Category(Common.CN_CATEGORY_APP)]
+        public string Key
+        {
+            get { return m_Key; }
+            set { m_Key = value; }
+        }
+        [Category(Common.CN_CATEGORY_APP)]
         public bool FixedSort
         {
             get { return m_FixedSort; }
             set
             {
                 m_FixedSort = value;
-
-                foreach (DataGridViewColumn col in this.Columns)
-                {
-                    if (m_FixedSort)
-                    {
-                        col.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    }
-                    else
-                    {
-                        col.SortMode = DataGridViewColumnSortMode.Automatic;
-                    }
-                }
+                RefreshCtl();
             }
         }
         [Category(Common.CN_CATEGORY_APP)]
@@ -77,36 +73,8 @@ namespace YMES.FX.Controls
         {
             base.OnSizeChanged(e);
             this.AutoGenerateColumns = false;
-            foreach (DataGridViewColumn col in this.Columns)
-            {
-                if (m_FixedSort)
-                {
-                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-                else
-                {
-                    col.SortMode = DataGridViewColumnSortMode.Automatic;
-                }
-            }
-            if (GridMode == GridModeEnum.QueryNomal)
-            {
-
-                this.MultiSelect = false;
-                this.RowHeadersVisible = false;
-                this.ReadOnly = true;
-                this.MultiSelect = false;
-                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                this.AllowUserToAddRows = false;
-                this.AllowUserToOrderColumns = false;
-                this.AllowUserToResizeColumns = false;
-                this.AllowUserToResizeRows = false;
-                this.AllowUserToOrderColumns = false;
-                this.RowTemplate.Height = 40;
-                this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-                this.ColumnHeadersHeight = 30;
-                this.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-                this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            }
+            RefreshCtl();
+            
         }
         protected override void OnDataBindingComplete(DataGridViewBindingCompleteEventArgs e)
         {
@@ -219,11 +187,16 @@ namespace YMES.FX.Controls
                 {
                     var key = item;
                     DataColumn col = new DataColumn();
+                    col.ColumnName = key.ToString();
                     dt.Columns.Add(col);
                     vals.Add(((IDictionary)val)[key]);
                 }
                 dt.Rows.Add(vals.ToArray());
                 this.DataSource = dt;
+                foreach(DataGridViewColumn dvcol in this.Columns)
+                {
+                    dvcol.HeaderText = dvcol.Name;
+                }
             }
             else
             {
@@ -234,6 +207,42 @@ namespace YMES.FX.Controls
                 dr[0] = val;
                 dt.Rows.Add(dr);
                 this.DataSource = dt;
+            }
+        }
+
+        public void RefreshCtl()
+        {
+            foreach (DataGridViewColumn col in this.Columns)
+            {
+                if (m_FixedSort)
+                {
+                    col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+                else
+                {
+                    col.SortMode = DataGridViewColumnSortMode.Automatic;
+                }
+            }
+
+            if (GridMode == GridModeEnum.QueryNomal)
+            {
+
+                this.MultiSelect = false;
+                this.RowHeadersVisible = false;
+                this.ReadOnly = true;
+                this.MultiSelect = false;
+                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                this.AllowUserToAddRows = false;
+                this.AllowUserToOrderColumns = false;
+                this.AllowUserToResizeColumns = false;
+                this.AllowUserToResizeRows = false;
+                this.AllowUserToOrderColumns = false;
+                this.RowTemplate.Height = 40;
+                this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+                this.ColumnHeadersHeight = 30;
+                this.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
+                this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
             }
         }
         #endregion

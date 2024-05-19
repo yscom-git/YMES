@@ -45,6 +45,9 @@
     <Compile Include="Base\Common.cs" />
     <Compile Include="Base\IYControls.cs" />
     <Compile Include="Base\IYGrid.cs" />
+    <Compile Include="YBitLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="YDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -52,6 +55,12 @@
       <DependentUpon>YDataGridView.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YTableLayout.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="YTableLayout.Designer.cs">
+      <DependentUpon>YTableLayout.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup />

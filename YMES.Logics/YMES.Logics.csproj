@@ -68,6 +68,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Base\LocalizedContainer.resx">
+      <DependentUpon>LocalizedContainer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MES\TagPrint.resx">
       <DependentUpon>TagPrint.cs</DependentUpon>
     </EmbeddedResource>
