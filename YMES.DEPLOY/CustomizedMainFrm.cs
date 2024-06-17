@@ -18,13 +18,9 @@ namespace YMES.DEPLOY
             InitializeComponent();
         }
         protected override void OnLoad(EventArgs e)
-        {            
-            base.OnLoad(e);            
-        }
-        protected override void StartBC()
         {
-            base.StartBC();
-            
+            RunBC = "";   //Call Start the Logic. "ex) MES.TagPrint"
+            base.OnLoad(e);            
         }
 
     }

@@ -34,8 +34,24 @@ namespace YMES.FX.MainForm
         
         private BaseContainer m_ChildBC = null;
         private DataTable m_XMLConfigDT = null;
-        
-        
+        private string m_RunBC = string.Empty;
+
+        [Browsable(false)]
+        public string RunBC
+        {
+            get { return m_RunBC; }
+            set 
+            {
+                if (string.IsNullOrEmpty(m_RunBC))
+                {
+                    m_RunBC = value;
+                }
+                else
+                {
+                    throw new Exception("BC is Already Assigned!!");
+                }
+            }
+        }
         
         
         [Browsable(false)]
@@ -200,6 +216,11 @@ namespace YMES.FX.MainForm
                     pgmClassName = MainCtl.LogicAppNameSpace + "." + GetXMLConfig(MainCtl.XMLDebugClientEleName).Substring(1) + ", " + MainCtl.LogicAppNameSpace;
                     ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
                 }
+                else if(string.IsNullOrEmpty(RunBC) == false)
+                {
+                    pgmClassName = MainCtl.LogicAppNameSpace + "." + RunBC + ", " + MainCtl.LogicAppNameSpace;
+                    ChildBC = (YMES.FX.MainForm.BaseContainer)Activator.CreateInstance(Type.GetType(pgmClassName));
+                }
             }
             catch (Exception eLog)
             {
@@ -208,11 +229,7 @@ namespace YMES.FX.MainForm
             }
 
         }
-        protected virtual void StartBC()
-        {
-            string error = "";
-            StartBC(out error);
-        }
+        
         private void InitTimeTimes(int timerCnt)
         {
             m_TimerDate = new DateTime[timerCnt];

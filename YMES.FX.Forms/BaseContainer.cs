@@ -56,6 +56,7 @@ namespace YMES.FX.MainForm
         public BaseContainer()
         {
             InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.None;
         }
         #region <<BaseFrom Control
         /// <summary>

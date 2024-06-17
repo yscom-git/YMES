@@ -16,6 +16,7 @@ namespace YMES.FX.Controls
         public YTableLayout()
         {
             this.DoubleBuffered = true;
+            
             InitializeComponent();
         }
     }
